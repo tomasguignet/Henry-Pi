@@ -5,16 +5,22 @@ const { API_KEY } = process.env;
 //Creamos las funciones para traer las recetas de la API
 async function getRecipesFromApi(name) {
     let recipes = [];
+    //Traemos los resultados de la API
     const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`);
+
+    //Vemos si llego una query en el path
     if (name) {
+        //Si llego una query buscamos resultados que coincidan con la misma
         results.data.results.forEach((result, i) => {
-            if (result.name === name) recipes.push(result);
+            if (result.name.includes(name)) recipes.push(result);
         })
     } else {
+        //Sino traemos 100 resultados
         results.data.results.forEach((result, i) => {
             if (i <= 100) recipes.push(result);
         })
     }
+    //Mapeamos el array de recetas solo con la informacion que queremos
     recipes = recipes.map(recipe => {
         return {
             id: recipe.id,
@@ -27,7 +33,6 @@ async function getRecipesFromApi(name) {
             image: recipe.image
         }
     })
-    console.log(recipes);
     return recipes;
 }
 async function getRecipeFromApi(id) {

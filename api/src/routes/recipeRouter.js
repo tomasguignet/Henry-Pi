@@ -14,7 +14,7 @@ recipeRouter.get("/", async(req, res) => {
     const recipes = await getRecipes(name);
     res.status(200).json(recipes);
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(400).send(error.message);
   }
 });
 
@@ -25,7 +25,7 @@ recipeRouter.get("/:id", async (req, res) => {
     res.status(200).json(recipe);
   } catch (error) {
 /*     if (recipe) return res.status(404).send("No existe la receta"); */
-    res.status(404).send(error.message);
+    res.status(400).send(error.message);
   }
 });
 
