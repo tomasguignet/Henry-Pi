@@ -9,6 +9,15 @@ async function getRecipesFromApi() {
     results.results.forEach(result => {
         if (result.id <= 100) recipes.push(result); 
     })
+    recipes.map(recipe => {
+        return {
+            id: recipe.id,
+            name: recipe.title,
+            summary: recipe.summary,
+            healthScore: recipe.healthScore,
+            instructions: "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+        }
+    })
     return recipes;
 }
 async function getRecipeFromApi(id) {
