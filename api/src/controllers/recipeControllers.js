@@ -1,28 +1,48 @@
-const {Recipe} = require("../db");
+const { Recipe } = require("../db");
 const axios = require("axios");
-const {API_KEY} = process.env;
+const { API_KEY } = process.env;
 
 //Creamos las funciones para traer las recetas de la API
-async function getRecipesFromApi() {
+async function getRecipesFromApi(name) {
     let recipes = [];
-    const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`);
-    results.results.forEach(result => {
-        if (result.id <= 100) recipes.push(result); 
-    })
-    recipes.map(recipe => {
+    const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`);
+    if (name) {
+        results.data.results.forEach((result, i) => {
+            if (result.name === name) recipes.push(result);
+        })
+    } else {
+        results.data.results.forEach((result, i) => {
+            if (i <= 100) recipes.push(result);
+        })
+    }
+    recipes = recipes.map(recipe => {
         return {
             id: recipe.id,
             name: recipe.title,
             summary: recipe.summary,
             healthScore: recipe.healthScore,
-            instructions: "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+            instructions: recipe.analyzedInstructions[0]?.steps.map(step => {
+                return step.step;
+            }),
+            image: recipe.image
         }
     })
+    console.log(recipes);
     return recipes;
 }
 async function getRecipeFromApi(id) {
-    const recipe = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
-    return recipe.data;
+    const result = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
+    const recipe = {
+        id: result.data.id,
+        name: result.data.title,
+        summary: result.data.summary,
+        healthScore: result.data.healthScore,
+        instructions: result.data.analyzedInstructions[0].steps.map(step => {
+            return step.step;
+        }),
+        image: result.data.image
+    }
+    return recipe;
 }
 
 //Creamos las funciones para traer las recetas de la base de datos
@@ -41,7 +61,7 @@ async function getRecipes() {
     const recipesFromApi = await getRecipesFromApi();
 
     const recipes = [...recipesFromApi, ...recipesFromDB];
-    if (!recipes.length) throw Error("No se encontraron recetas");
+    /* if (!recipes.length) throw Error("No se encontraron recetas"); */
     return recipes;
 }
 async function getRecipe(id) {
@@ -54,13 +74,13 @@ async function getRecipe(id) {
 }
 
 //Creamos la funcion para registrar una nueva receta
-async function createRecipe(name , summary , healthScore , instructions , image) {
-    const newRecipe = await Recipe.create({name , summary , healthScore , instructions , image});
+async function createRecipe(name, summary, healthScore, instructions, image) {
+    const newRecipe = await Recipe.create({ name, summary, healthScore, instructions, image });
     return newRecipe;
 }
 
 module.exports = {
-    getRecipes ,
-    getRecipe ,
+    getRecipes,
+    getRecipe,
     createRecipe
 }

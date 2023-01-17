@@ -8,11 +8,19 @@ const {
 
 const recipeRouter = Router();
 
-recipeRouter.get("/", (req, res) => {});
+recipeRouter.get("/", async(req, res) => {
+  const {name} = req.query;
+  try {
+    const recipes = await getRecipes(name);
+    res.status(200).json(recipes);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 
 recipeRouter.get("/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const recipe = await getRecipe(id);
     res.status(200).json(recipe);
   } catch (error) {
