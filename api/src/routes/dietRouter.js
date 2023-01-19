@@ -19,6 +19,7 @@ dietRouter.post("/preCharge", async (req, res) => {
 dietRouter.get("/", async (req, res) => {
   try {
     const diets = await getDietsFromDB();
+    res.status(200).json(diets);
   } catch (error) {
     res.status(400).send(error.message);
   }

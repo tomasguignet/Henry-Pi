@@ -6,7 +6,7 @@ const { API_KEY } = process.env;
 async function getRecipesFromApi(name) {
     let recipes = [];
     //Traemos los resultados de la API
-    const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`);
+    const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100`);
 
     //Vemos si llego una query en el path
     if (name) {
@@ -51,7 +51,10 @@ async function getRecipeFromApi(id) {
 }
 
 //Creamos las funciones para traer las recetas de la base de datos
-async function getRecipesFromDB() {
+async function getRecipesFromDB(name) {
+    if (name) {
+        const recipes = await Recipe.findAll({where : {name: name}});
+    }
     const recipes = await Recipe.findAll();
     return recipes;
 }
@@ -62,8 +65,8 @@ async function getRecipeFromDB(id) {
 
 //Juntamos resultados de la API y la Base de datos
 async function getRecipes() {
-    const recipesFromDB = await getRecipesFromDB();
-    const recipesFromApi = await getRecipesFromApi();
+    const recipesFromDB = await getRecipesFromDB(name);
+    const recipesFromApi = await getRecipesFromApi(name);
 
     const recipes = [...recipesFromApi, ...recipesFromDB];
     /* if (!recipes.length) throw Error("No se encontraron recetas"); */

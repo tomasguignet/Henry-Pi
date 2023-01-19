@@ -6,16 +6,29 @@ async function getDietsFromApi() {
   let diets = [];
   //Traemos los resultados de la API
   const results = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100`
   );
   //De los resultados analizamos si en el array "diets" existe cierta dieta y si no existe la pusheamos
+  console.log("Por hacer el foreach");
   results.data.results.forEach((result) => {
-    for (let i = 0; i < result.diets; i++) {
+    console.log("Dentro del for each");
+    console.log(result.diets);
+    result.diets.forEach((diet) => {
+      if (!diets.includes(diet)) {
+        console.log("Se pushea la dieta");
+        diets.push(diet);
+      }
+    })
+/*     for (let i = 0; i < result.diets; i++) {
+      console.log("Una dieta");
       if (!diets.includes(result.diets[i])) {
+        console.log("Se pushea la dieta");
         diets.push(result.diets[i]);
       }
-    }
+    } */
+    console.log("Despues del for");
   });
+  console.log(diets);
   return diets;
 }
 
