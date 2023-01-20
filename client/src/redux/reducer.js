@@ -1,4 +1,4 @@
-import { UPLOAD_RECIPES, UPLOAD_RECIPE, UPLOAD_DIETS } from "./actions";
+import { GET_RECIPES, GET_RECIPE, GET_DIETS } from "./actions";
 
 //Definimos los estados que usaremos en muchas partes de la api
 const initialState = {
@@ -11,17 +11,17 @@ const initialState = {
 //Definimos el reducer donde se setearan las acciones disponibles para cambiar el estado
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPLOAD_RECIPES:
+    case GET_RECIPES:
       return {
         ...state,
         recipes: action.payload,
       };
-    case UPLOAD_RECIPE:
+    case GET_RECIPE:
       return {
         ...state,
         recipe: action.payload,
       };
-    case UPLOAD_DIETS:
+    case GET_DIETS:
       return {
         ...state,
         diets: action.payload,

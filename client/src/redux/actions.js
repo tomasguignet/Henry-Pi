@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios"
 //Definimos los tipos de acciones que afectan al estado global
 export const GET_DIETS = "GET_DIETS";
 export const GET_RECIPES = "GET_RECIPES";
