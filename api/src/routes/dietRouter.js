@@ -7,19 +7,19 @@ const {
 
 const dietRouter = Router();
 
-dietRouter.post("/preCharge", async (req, res) => {
+/* dietRouter.get("/preCharge", async (req, res) => {
   try {
     await preChargeDietsInDB();
     res.status(200).send("Dietas cargadas");
   } catch (error) {
     res.status(400).send(error.message);
   }
-});
+}); */
 
 dietRouter.get("/", async (req, res) => {
   try {
     const diets = await getDietsFromDB();
-    res.status(200).json(diets);
+    res.status(200).send(diets);
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -12,7 +12,7 @@ recipeRouter.get("/", async(req, res) => {
   const {name} = req.query;
   try {
     const recipes = await getRecipes(name);
-    res.status(200).json(recipes);
+    res.status(200).send(recipes);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -22,7 +22,7 @@ recipeRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const recipe = await getRecipe(id);
-    res.status(200).json(recipe);
+    res.status(200).send(recipe);
   } catch (error) {
 /*     if (recipe) return res.status(404).send("No existe la receta"); */
     res.status(400).send(error.message);
@@ -39,7 +39,7 @@ recipeRouter.post("/", async(req, res) => {
       instructions,
       image
     );
-    res.status(200).json(newRecipe);
+    res.status(200).send(newRecipe);
   } catch (error) {
     res.status(400).send(error.message);
   }

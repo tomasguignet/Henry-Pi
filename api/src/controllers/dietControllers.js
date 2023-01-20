@@ -33,6 +33,7 @@ async function getDietsFromApi() {
 }
 
 async function getDietsFromDB() {
+  await preChargeDietsInDB();
   const diets = await Diet.findAll();
   return diets;
 }

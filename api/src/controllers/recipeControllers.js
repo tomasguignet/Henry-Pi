@@ -82,8 +82,9 @@ async function getRecipe(id) {
 }
 
 //Creamos la funcion para registrar una nueva receta
-async function createRecipe(name, summary, healthScore, instructions, image) {
+async function createRecipe(name, summary, healthScore, instructions, image, diets) {
     const newRecipe = await Recipe.create({ name, summary, healthScore, instructions, image });
+    if (diets) await Recipe.addDiets(diets);
     return newRecipe;
 }
 
