@@ -8,7 +8,6 @@ export default function Index() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("EN el index");
     dispatch(getDiets());
     dispatch(getRecipes());
   });

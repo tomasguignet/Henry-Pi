@@ -1,4 +1,4 @@
-const { Recipe } = require("../db");
+const { Recipe , Diet } = require("../db");
 const axios = require("axios");
 const { API_KEY } = process.env;
 
@@ -59,14 +59,21 @@ async function getRecipeFromApi(id) {
 async function getRecipesFromDB(name) {
     console.log(name);
     if (name) {
-        console.log("dentro del if");
         let recipes = await Recipe.findAll();
         recipes = recipes.filter(recipe => {
             return recipe.name.toLowerCase().includes(name.toLowerCase());
         })
         return recipes
     }
-    const recipes = await Recipe.findAll();
+    const recipes = await Recipe.findAll({
+        include: {
+            model: Diet,
+            attributes: ["name"],
+            through: {
+                attributes: []
+            }
+        }
+    });
     return recipes;
 }
 async function getRecipeFromDB(id) {

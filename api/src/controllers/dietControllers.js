@@ -9,38 +9,32 @@ async function getDietsFromApi() {
     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100`
   );
   //De los resultados analizamos si en el array "diets" existe cierta dieta y si no existe la pusheamos
-  console.log("Por hacer el foreach");
   results.data.results.forEach((result) => {
-    console.log("Dentro del for each");
-    console.log(result.diets);
     result.diets.forEach((diet) => {
       if (!diets.includes(diet)) {
-        console.log("Se pushea la dieta");
         diets.push(diet);
       }
-    })
-/*     for (let i = 0; i < result.diets; i++) {
+    });
+    /*     for (let i = 0; i < result.diets; i++) {
       console.log("Una dieta");
       if (!diets.includes(result.diets[i])) {
         console.log("Se pushea la dieta");
         diets.push(result.diets[i]);
       }
     } */
-    console.log("Despues del for");
   });
-  console.log(diets);
   return diets;
 }
 
 async function getDietsFromDB() {
-  await preChargeDietsInDB();
-  const diets = await Diet.findAll();
+  /* const diets = await Diet.findAll(); */
+  const diets = await preChargeDietsInDB();
   return diets;
 }
 
 async function preChargeDietsInDB() {
-  const diets = await getDietsFromApi();
-/*   const diets = [
+  /* const diets = await getDietsFromApi(); */
+  const diets = [
     "Gluten Free",
     "Ketogenic",
     "Vegetarian",
@@ -51,20 +45,21 @@ async function preChargeDietsInDB() {
     "Paleo",
     "Primal",
     "Low FODMAP",
-    "Whole30"
-  ] */
+    "Whole30",
+  ];
   for (const diet of diets) {
     Diet.create({ name: diet });
   }
+  return diets;
 }
 
 async function createDiet(name) {
-    const newDiet = await Diet.create({name});
-    return newDiet;
+  const newDiet = await Diet.create({ name });
+  return newDiet;
 }
 
 module.exports = {
-    getDietsFromDB ,
-    preChargeDietsInDB ,
-    createDiet
+  getDietsFromDB,
+  preChargeDietsInDB,
+  createDiet,
 };
