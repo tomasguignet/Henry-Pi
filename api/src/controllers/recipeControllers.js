@@ -12,7 +12,11 @@ async function getRecipesFromApi(name) {
     if (name) {
         //Si llego una query buscamos resultados que coincidan con la misma
         results.data.results.forEach((result, i) => {
-            if (result.name.includes(name)) recipes.push(result);
+            let title = result.title.toLowerCase();
+            let name1 = name.toLowerCase();
+            if (title.includes(name1)) {
+                recipes.push(result)
+            };
         })
     } else {
         //Sino traemos 100 resultados
@@ -27,6 +31,7 @@ async function getRecipesFromApi(name) {
             name: recipe.title,
             summary: recipe.summary,
             healthScore: recipe.healthScore,
+            diets: recipe.diets,
             instructions: recipe.analyzedInstructions[0]?.steps.map(step => {
                 return step.step;
             }),
@@ -52,8 +57,14 @@ async function getRecipeFromApi(id) {
 
 //Creamos las funciones para traer las recetas de la base de datos
 async function getRecipesFromDB(name) {
+    console.log(name);
     if (name) {
-        const recipes = await Recipe.findAll({where : {name: name}});
+        console.log("dentro del if");
+        let recipes = await Recipe.findAll();
+        recipes = recipes.filter(recipe => {
+            return recipe.name.toLowerCase().includes(name.toLowerCase());
+        })
+        return recipes
     }
     const recipes = await Recipe.findAll();
     return recipes;
@@ -64,7 +75,7 @@ async function getRecipeFromDB(id) {
 }
 
 //Juntamos resultados de la API y la Base de datos
-async function getRecipes() {
+async function getRecipes(name) {
     const recipesFromDB = await getRecipesFromDB(name);
     const recipesFromApi = await getRecipesFromApi(name);
 
@@ -84,7 +95,7 @@ async function getRecipe(id) {
 //Creamos la funcion para registrar una nueva receta
 async function createRecipe(name, summary, healthScore, instructions, image, diets) {
     const newRecipe = await Recipe.create({ name, summary, healthScore, instructions, image });
-    if (diets) await Recipe.addDiets(diets);
+    if (diets) await newRecipe.addDiet(diets);
     return newRecipe;
 }
 
