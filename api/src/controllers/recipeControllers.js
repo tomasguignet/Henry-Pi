@@ -1,4 +1,4 @@
-const { Recipe , Diet } = require("../db");
+const { Recipe, Diet } = require("../db");
 const axios = require("axios");
 const { API_KEY } = process.env;
 
@@ -47,7 +47,8 @@ async function getRecipeFromApi(id) {
         name: result.data.title,
         summary: result.data.summary,
         healthScore: result.data.healthScore,
-        instructions: result.data.analyzedInstructions[0].steps.map(step => {
+        diets: result.data.diets,
+        instructions: result.data.analyzedInstructions[0]?.steps.map(step => {
             return step.step;
         }),
         image: result.data.image
@@ -57,15 +58,45 @@ async function getRecipeFromApi(id) {
 
 //Creamos las funciones para traer las recetas de la base de datos
 async function getRecipesFromDB(name) {
-    console.log(name);
     if (name) {
-        let recipes = await Recipe.findAll();
-        recipes = recipes.filter(recipe => {
+        const result = await Recipe.findAll({
+            include: {
+                model: Diet,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }
+        });
+        var recipes = result.filter(recipe => {
             return recipe.name.toLowerCase().includes(name.toLowerCase());
         })
-        return recipes
+    } else {
+        var recipes = await Recipe.findAll({
+            include: {
+                model: Diet,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }
+        })
     }
-    const recipes = await Recipe.findAll({
+    const recipes1 = recipes.map(recipe => {
+        return {
+            id: recipe.id,
+            name: recipe.name,
+            summary: recipe.summary,
+            healthScore: recipe.healthScore,
+            diets: recipe.diets.map(diet => diet.name),
+            instructions: recipe.instructions,
+            image: recipe.image
+        }
+    })
+    return recipes1;
+}
+async function getRecipeFromDB(id) {
+    const recipe = await Recipe.findByPk(id, {
         include: {
             model: Diet,
             attributes: ["name"],
@@ -74,11 +105,16 @@ async function getRecipesFromDB(name) {
             }
         }
     });
-    return recipes;
-}
-async function getRecipeFromDB(id) {
-    const recipe = await Recipe.findByPk(id);
-    return recipe;
+    const recipe1 = {
+        id: recipe.id,
+        name: recipe.name,
+        summary: recipe.summary,
+        healthScore: recipe.healthScore,
+        diets: recipe.diets.map(diet => diet.name),
+        instructions: recipe.instructions,
+        image: recipe.image
+    }
+    return recipe1;
 }
 
 //Juntamos resultados de la API y la Base de datos

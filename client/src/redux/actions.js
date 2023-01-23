@@ -8,9 +8,10 @@ export const CLEAN_RECIPE = "CLEAN_RECIPE";
 
 //Definimos las acciones con su tipo
 export const getDiets = () => {
-  return function (dispatch) {
+  return async function (dispatch) {
+    /* await axios.get("https://http://localhost:3001/diets/preCharge"); */
     axios
-      .get("https://http://localhost:3001/diets")
+      .get("http://localhost:3001/diets")
       .then((data) => dispatch({ type: GET_DIETS, payload: data.data }))
       .catch((error) => console.log(error.message));
   };
@@ -19,7 +20,7 @@ export const getDiets = () => {
 export const getRecipes = () => {
   return function (dispatch) {
     axios
-      .get("https://http://localhost:3001/recipes")
+      .get("http://localhost:3001/recipes")
       .then((data) => dispatch({ type: GET_RECIPES, payload: data.data }))
       .catch((error) => console.log(error.message));
   };
@@ -28,7 +29,7 @@ export const getRecipes = () => {
 export const getRecipe = (id) => {
   return function (dispatch) {
     try {
-      const response = axios.get(`https://http://localhost:3001/recipes/${id}`);
+      const response = axios.get(`http://localhost:3001/recipes/${id}`);
       return dispatch({ type: GET_RECIPE, payload: response.data });
     } catch (error) {
       console.log(error.message);
@@ -40,7 +41,7 @@ export const createRecipe = (recipe) => {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        "https://http://localhost:3001/recipes",
+        "http://localhost:3001/recipes",
         recipe
       );
       return response;
@@ -53,7 +54,7 @@ export const createRecipe = (recipe) => {
 export const createDiet = (diet) => {
   return async function (dispatch) {
     const response = await axios.post(
-      "https://http://localhost:3001/diets",
+      "http://localhost:3001/diets",
       diet
     );
     return response;

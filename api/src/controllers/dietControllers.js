@@ -27,8 +27,8 @@ async function getDietsFromApi() {
 }
 
 async function getDietsFromDB() {
-  /* const diets = await Diet.findAll(); */
-  const diets = await preChargeDietsInDB();
+  const diets = await Diet.findAll();
+/*   const diets = await preChargeDietsInDB(); */
   return diets;
 }
 
@@ -36,6 +36,7 @@ async function preChargeDietsInDB() {
   /* const diets = await getDietsFromApi(); */
   const diets = [
     "Gluten Free",
+    "Dairy Free",
     "Ketogenic",
     "Vegetarian",
     "Lacto-Vegetarian",
@@ -50,7 +51,6 @@ async function preChargeDietsInDB() {
   for (const diet of diets) {
     Diet.create({ name: diet });
   }
-  return diets;
 }
 
 async function createDiet(name) {
