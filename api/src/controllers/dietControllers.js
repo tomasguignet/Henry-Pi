@@ -49,7 +49,7 @@ async function preChargeDietsInDB() {
     "Whole30",
   ];
   for (const diet of diets) {
-    Diet.create({ name: diet });
+    Diet.findOrCreate({ name: diet });
   }
 }
 

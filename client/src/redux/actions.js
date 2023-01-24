@@ -5,6 +5,10 @@ export const GET_RECIPES = "GET_RECIPES";
 export const GET_DIET = "GET_DIET";
 export const GET_RECIPE = "GET_RECIPE";
 export const CLEAN_RECIPE = "CLEAN_RECIPE";
+export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
+export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
+export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
+export const ORDER_ALPHABETICALLY = "ORDER_ALPHABETICALLY";
 
 //Definimos las acciones con su tipo
 export const getDiets = () => {
@@ -60,6 +64,31 @@ export const createDiet = (diet) => {
     return response;
   };
 };
+
+export const getRecipesByName = (name) => {
+  return async function (dispatch) {
+    const response = await axios.get(`http://localhost:3001/recipes?name=${name}`)
+    return dispatch({type: GET_RECIPES_BY_NAME, payload: response});
+  }
+}
+
+export const filterByDiets = (diets) => {
+  return async function (dispatch) {
+    return dispatch({type: FILTER_BY_DIETS, payload: diets});
+  }
+}
+
+export const orderByScore = () => {
+  return async function (dispatch) {
+    return dispatch({type: ORDER_BY_SCORE})
+  }
+}
+
+export const orderAlphabetically = () => {
+  return async function (dispatch) {
+    return dispatch({type: ORDER_ALPHABETICALLY});
+  }
+}
 
 export const cleanRecipe = () => {
   return { type: CLEAN_RECIPE };

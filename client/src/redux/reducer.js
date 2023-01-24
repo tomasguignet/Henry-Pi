@@ -1,11 +1,20 @@
-import { GET_RECIPES, GET_RECIPE, GET_DIETS } from "./actions";
+import {
+  GET_RECIPES,
+  GET_RECIPE,
+  GET_DIETS,
+  GET_RECIPES_BY_NAME,
+  FILTER_BY_DIETS,
+  ORDER_ALPHABETICALLY,
+  ORDER_BY_SCORE,
+  CLEAN_RECIPE,
+} from "./actions";
 
 //Definimos los estados que usaremos en muchas partes de la api
 const initialState = {
-  recipes: [],
+  allRecipes: [],
   recipe: {},
   diets: [],
-  diet: {},
+  currentRecipes: [],
 };
 
 //Definimos el reducer donde se setearan las acciones disponibles para cambiar el estado
@@ -14,7 +23,8 @@ const reducer = (state = initialState, action) => {
     case GET_RECIPES:
       return {
         ...state,
-        recipes: action.payload,
+        allRecipes: action.payload,
+        currentRecipes: action.payload,
       };
     case GET_RECIPE:
       return {
@@ -25,6 +35,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         diets: action.payload,
+      };
+    case GET_RECIPES_BY_NAME:
+      return {
+        ...state,
+        currentRecipes: action.payload,
+      };
+    case FILTER_BY_DIETS:  
+    return {
+        ...state,
+        currentRecipes: allRecipes.filter((recipe) => recipe.diets.includes(action.payload))
+        //REVISAR EL BIEN COMO LLEGAN LAS DIETAS DE LA DB Y LA ACTION
       };
 
     default:

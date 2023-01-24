@@ -16,7 +16,7 @@ export default function Index() {
     );
     dispatch(getDiets());
     dispatch(getRecipes());
-  });
+  },[]);
 
   return (
     <div className="container">
