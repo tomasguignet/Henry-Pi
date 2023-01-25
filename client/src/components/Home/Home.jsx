@@ -1,12 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Recipe from "../Recipe/Recipe";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination";
+import { getDiets, getRecipes } from "../../redux/actions";
 
 export default function Home() {
   const recipes = useSelector((state) => state.currentRecipes);
-
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(9);
 
@@ -17,6 +18,11 @@ export default function Home() {
 
   //Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    dispatch(getRecipes());
+    dispatch(getDiets());
+  }, []);
 
   return (
     <div className="container">

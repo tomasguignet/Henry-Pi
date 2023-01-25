@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 //Definimos los tipos de acciones que afectan al estado global
 export const GET_DIETS = "GET_DIETS";
 export const GET_RECIPES = "GET_RECIPES";
@@ -9,24 +9,32 @@ export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
 export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
 export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 export const ORDER_ALPHABETICALLY = "ORDER_ALPHABETICALLY";
+export const CREATE_RECIPE = "CREATE_RECIPE";
+export const CREATE_DIET = "CREATE_DIET";
 
 //Definimos las acciones con su tipo
 export const getDiets = () => {
   return async function (dispatch) {
     /* await axios.get("https://http://localhost:3001/diets/preCharge"); */
-    axios
-      .get("http://localhost:3001/diets")
-      .then((data) => dispatch({ type: GET_DIETS, payload: data.data }))
-      .catch((error) => console.log(error.message));
+    try {
+      axios
+        .get("http://localhost:3001/diets")
+        .then((data) => dispatch({ type: GET_DIETS, payload: data.data }));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
 export const getRecipes = () => {
   return function (dispatch) {
-    axios
-      .get("http://localhost:3001/recipes")
-      .then((data) => dispatch({ type: GET_RECIPES, payload: data.data }))
-      .catch((error) => console.log(error.message));
+    try {
+      axios
+        .get("http://localhost:3001/recipes")
+        .then((data) => dispatch({ type: GET_RECIPES, payload: data.data }));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
@@ -48,7 +56,7 @@ export const createRecipe = (recipe) => {
         "http://localhost:3001/recipes",
         recipe
       );
-      return response;
+      return dispatch({ type: CREATE_RECIPE });
     } catch (error) {
       console.log(error.message);
     }
@@ -57,38 +65,57 @@ export const createRecipe = (recipe) => {
 
 export const createDiet = (diet) => {
   return async function (dispatch) {
-    const response = await axios.post(
-      "http://localhost:3001/diets",
-      diet
-    );
-    return response;
+    try {
+      await axios.post("http://localhost:3001/diets", diet);
+      return dispatch({ type: CREATE_DIET });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
 export const getRecipesByName = (name) => {
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:3001/recipes?name=${name}`)
-    return dispatch({type: GET_RECIPES_BY_NAME, payload: response});
-  }
-}
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/recipes?name=${name}`
+      );
+      return dispatch({ type: GET_RECIPES_BY_NAME, payload: response });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export const filterByDiets = (diets) => {
   return async function (dispatch) {
-    return dispatch({type: FILTER_BY_DIETS, payload: diets});
-  }
-}
+    try {
+      return dispatch({ type: FILTER_BY_DIETS, payload: diets });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
-export const orderByScore = () => {
+export const orderByScore = (asc) => {
   return async function (dispatch) {
-    return dispatch({type: ORDER_BY_SCORE})
-  }
-}
+    try {
+      return dispatch({ type: ORDER_BY_SCORE, payload: asc });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
-export const orderAlphabetically = () => {
+export const orderAlphabetically = (asc) => {
   return async function (dispatch) {
-    return dispatch({type: ORDER_ALPHABETICALLY});
-  }
-}
+    try {
+      return dispatch({ type: ORDER_ALPHABETICALLY, payload: asc });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export const cleanRecipe = () => {
   return { type: CLEAN_RECIPE };

@@ -6,6 +6,8 @@ import {
   FILTER_BY_DIETS,
   ORDER_ALPHABETICALLY,
   ORDER_BY_SCORE,
+  CREATE_RECIPE,
+  CREATE_DIET,
   CLEAN_RECIPE,
 } from "./actions";
 
@@ -41,11 +43,63 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentRecipes: action.payload,
       };
-    case FILTER_BY_DIETS:  
-    return {
+    case FILTER_BY_DIETS:
+      return {
         ...state,
-        currentRecipes: allRecipes.filter((recipe) => recipe.diets.includes(action.payload))
+        currentRecipes: allRecipes.filter((recipe) => {
+          return recipe.diets.includes(action.payload);
+        }),
         //REVISAR EL BIEN COMO LLEGAN LAS DIETAS DE LA DB Y LA ACTION
+      };
+    case ORDER_ALPHABETICALLY:
+      const recipesAlphabetically = action.payload
+        ? state.currentRecipes.sort((a, b) => {
+            a = a.name.toLowerCase();
+            b = b.name.toLowerCase();
+            if (a > b) return 1;
+            if (a < b) return -1;
+            return 0;
+          })
+        : state.currentRecipes.sort((a, b) => {
+            a = a.name.toLowerCase();
+            b = b.name.toLowerCase();
+            if (a < b) return 1;
+            if (a > b) return -1;
+            return 0;
+          });
+      return {
+        ...state,
+        currentRecipes: recipesAlphabetically,
+      };
+    case ORDER_BY_SCORE:
+      const recipesByScore = action.payload
+        ? state.currentRecipes.sort((a, b) => {
+            if (a.healthScore > b.healthScore) return 1;
+            if (a.healthScore < b.healthScore) return -1;
+            return 0;
+          })
+        : state.currentRecipes.sort((a, b) => {
+            if (a.healthScore < b.healthScore) return 1;
+            if (a.healthScore > b.healthScore) return -1;
+            return 0;
+          });
+      return {
+        ...state,
+        currentRecipes: recipesByScore,
+      };
+
+    case CREATE_RECIPE:
+      return {
+        ...state,
+      };
+    case CREATE_DIET:
+      return {
+        ...state,
+      };
+    case CLEAN_RECIPE:
+      return {
+        ...state,
+        recipe: {},
       };
 
     default:
