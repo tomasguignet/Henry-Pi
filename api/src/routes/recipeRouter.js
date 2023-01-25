@@ -30,12 +30,13 @@ recipeRouter.get("/:id", async (req, res) => {
 });
 
 recipeRouter.post("/", async(req, res) => {
-  const { name, summary, healthScore, instructions, image, diets } = req.body;
+  const { name, summary, healthScore, dishTypes, instructions, image, diets } = req.body;
   try {
     const newRecipe = await createRecipe(
       name,
       summary,
       healthScore,
+      dishTypes,
       instructions,
       image,
       diets

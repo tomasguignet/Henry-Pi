@@ -28,6 +28,9 @@ module.exports = (sequelize) => {
       instructions: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
+      dishTypes: {
+        type: DataTypes.ARRAY(DataTypes.STRING)
+      },
       image: {
         type: DataTypes.STRING,
         defaultValue: "https://as1.ftcdn.net/v2/jpg/00/87/64/82/1000_F_87648201_jO23xggA2W2EjCdfqCTqliX9typRG9rp.jpg"
