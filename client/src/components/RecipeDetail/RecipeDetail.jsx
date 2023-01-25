@@ -15,33 +15,39 @@ export default function Recipedetail() {
 
   return (
     <div>
-      <div>
-        <h1>{recipe.name}</h1>
-      </div>
-      <div>
-        <img src={recipe.image} alt="recipe-image" />
-      </div>
-      <div>
-        <ul>
-          {recipe.diets.map((diet) => (
-            <li>{diet}</li>
-          ))}
-        </ul>
+
+      <div className="left-box">
+        <div>
+          <h1>{recipe.name}</h1>
+        </div>
+        <div>
+          <img src={recipe.image} alt="recipe-image" />
+        </div>
+        <div>
+          <ul>
+            {recipe.diets.map((diet) => (
+              <li>{diet}</li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div>
-        <h3>Health Score : {recipe.healthScore}</h3>          
-      </div>
-      <div>
-        <p>{recipe.summary}</p>
-      </div>
-      <div>
-        <ol>
-            {recipe.instructions.map(ins => (
-                <li>{ins}</li>
+      <div className="rigth-box">
+        <div>
+          <h3>Health Score : {recipe.healthScore}</h3>
+        </div>
+        <div>
+          <p>{recipe.summary}</p>
+        </div>
+        <div>
+          <ol>
+            {recipe.instructions?.map(ins => (
+              <li>{ins}</li>
             ))}
-        </ol>
+          </ol>
+        </div>
       </div>
+
     </div>
   );
 }
