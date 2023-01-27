@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getRecipes, getDiets } from "../../redux/actions";
-import "./Index.css";
-import logoHenry from "../../images/logoHenry.jpg"
+import styles from  "./Index.module.css";
+import logoHenry from "../../images/logoHenry.jpg";
 
 export default function Index() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
     axios.get("http://localhost:3001/diets/preCharge").then(
-      ((data) => console.log("DataBase ready!")),
-      ((error) => console.log(error.message))
+      (data) => console.log("DataBase ready!"),
+      (error) => console.log(error.message)
     );
     dispatch(getDiets());
     dispatch(getRecipes());
-  },[]);
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -31,7 +31,9 @@ export default function Index() {
       </div>
       <Link to={"/home"}>
         <div className="button-box">
-          <button type="button" className="button">Start</button>
+          <button type="button" className="button">
+            Start
+          </button>
         </div>
       </Link>
     </div>

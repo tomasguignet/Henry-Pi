@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination";
 import { getDiets, getRecipes } from "../../redux/actions";
+import styles from "./Home.module.css";
 
 export default function Home() {
-  const recipes = useSelector((state) => state.currentRecipes);
+  const recipes = useSelector((state) => state.data.currentRecipes);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(9);
@@ -22,10 +23,10 @@ export default function Home() {
   useEffect(() => {
     dispatch(getRecipes());
     dispatch(getDiets());
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div>
         {currentRecipes.map((recipe) => (
           <Link to={`/recipes/${recipe.id}`}>
@@ -40,7 +41,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="pagination">
+      <div className={styles.pagination}>
         <Pagination
           totalRecipes={recipes.length}
           recipesPerPage={recipesPerPage}

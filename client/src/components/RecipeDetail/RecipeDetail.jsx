@@ -11,7 +11,7 @@ export default function Recipedetail() {
     dispatch(getRecipe(id));
   }, [dispatch, id]);
 
-  const recipe = useSelector((state) => state.recipe);
+  const recipe = useSelector((state) => state.data.recipe);
 
   return (
     <div>

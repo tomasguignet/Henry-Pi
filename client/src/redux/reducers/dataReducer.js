@@ -9,7 +9,8 @@ import {
   CREATE_RECIPE,
   CREATE_DIET,
   CLEAN_RECIPE,
-} from "./actions";
+  SET_LOADING
+} from "../actions";
 
 //Definimos los estados que usaremos en muchas partes de la api
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   diets: [],
   currentRecipes: [],
 };
+
 
 //Definimos el reducer donde se setearan las acciones disponibles para cambiar el estado
 const reducer = (state = initialState, action) => {
@@ -46,7 +48,7 @@ const reducer = (state = initialState, action) => {
     case FILTER_BY_DIETS:
       return {
         ...state,
-        currentRecipes: allRecipes.filter((recipe) => {
+        currentRecipes: state.allRecipes.filter((recipe) => {
           return recipe.diets.includes(action.payload);
         }),
         //REVISAR EL BIEN COMO LLEGAN LAS DIETAS DE LA DB Y LA ACTION
@@ -106,5 +108,6 @@ const reducer = (state = initialState, action) => {
       return { ...state };
   }
 };
+
 
 export default reducer;

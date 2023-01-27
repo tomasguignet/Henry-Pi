@@ -8,15 +8,28 @@ import NavBar from "./components/NavBar/NavBar";
 import DietForm from "./components/DietForm/DietForm";
 import SearchBar from "./components/SearchBar/SearchBar";
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import { useEffect } from 'react';
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { getRecipes, getDiets } from "../src/redux/actions";
 
 function App() {
-  console.log("En App");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios.get("http://localhost:3001/diets/preCharge").then(
+      (data) => console.log("DataBase ready!"),
+      (error) => console.log(error.message)
+    );
+    dispatch(getDiets());
+    dispatch(getRecipes());
+  },[dispatch])
+
   return (
     <Switch>
-      <Route path="/">
+      <Route exact path="/">
         <Index />
       </Route>
-      <Route path="/home">
+      <Route exact path="/home">
         <NavBar />
         <SearchBar />
         <Home />

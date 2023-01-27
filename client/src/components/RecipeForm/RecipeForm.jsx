@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createRecipe } from "../../redux/actions";
 
 export default function RecipeForm() {
   const dispatch = useDispatch();
-  const diets = useSelector((state) => state.diets);
+  const diets = useSelector((state) => state.data.diets);
 
   const [index, setIndex] = useState(0);
 
@@ -32,7 +32,7 @@ export default function RecipeForm() {
     diets: [],
     dishTypes: [],
     instructions: [],
-    image: ""
+    image: "",
   });
 
   const [errors, setErrors] = useState({
@@ -42,10 +42,8 @@ export default function RecipeForm() {
     diets: "",
     dishTypes: "",
     instructions: "",
-    image: ""
+    image: "",
   });
-
-  const [dietss, setDietss] = useState({});
 
   const validate = ({
     name,
@@ -53,22 +51,28 @@ export default function RecipeForm() {
     healthScore,
     diets,
     dishTypes,
-    instructions
+    instructions,
   }) => {
     const errors = {};
 
     errors.name = !name ? "Se requiere un nombre" : errors.name;
-    errors.summary = !summary ? "Se requiere un resumen de la receta" : errors.summary;
-    errors.healthScore = healthScore < 0 ? "La puntuacion no puede ser negativa" : errors.healthScore;
+    errors.summary = !summary
+      ? "Se requiere un resumen de la receta"
+      : errors.summary;
+    errors.healthScore =
+      healthScore < 0
+        ? "La puntuacion no puede ser negativa"
+        : errors.healthScore;
     if (!diets.length) errors.diets = "Tiene que tener al menos una dieta";
-    if (!dishTypes.length) errors.dishTypes = "Tiene que tener al menos un tipo de plato";
+    if (!dishTypes.length)
+      errors.dishTypes = "Tiene que tener al menos un tipo de plato";
     if (instructions.length > 0) {
       for (const i of instructions) {
-        if (!i.length) errors.instructions = "No puede haber una instruccion vacia";
+        if (!i.length)
+          errors.instructions = "No puede haber una instruccion vacia";
       }
     }
     return errors;
-
   };
 
   const handleChange = (event) => {
@@ -88,41 +92,66 @@ export default function RecipeForm() {
     );
   };
 
-  const handleCheckbox = (event, key) => {
-    let array = inputs.instructions;
-    if (array[key]) {
-      array[key] = event.target.value;
+  const [instructions, setInstructions] = useState([]);
+
+  const addInstruction = (event) => {
+    setInstructions([
+      ...instructions,
+      {
+        id: instructions.at(-1) ? instructions.at(-1).id + 1 : 0,
+        text: "",
+      },
+    ]);
+  };
+
+  const handleInstructions = (event, id) => {
+    let instructionState = instructions[id];
+    let newArray = [];
+
+    instructionState.text = event.target.value;
+    if (newArray[id]) {
+      newArray[id] = event.target.value;
     } else {
-      array.push(event.target.value)
+      newArray.push(event.target.value);
     }
-    
+
     setInputs({
       ...inputs,
-      instructions: array
+      instructions: newArray,
     });
     setErrors(
       validate({
         ...inputs,
-        instructions: array
+        instructions: newArray,
       })
-    )
-  }
+    );
+  };
 
-  const addInstruction = (event) => {
-    const instructionsLabel = document.getElementsByClassName("instructionsInputs");
-    if (!instructionsLabel.lastElementChild.value) { alert("Debes completar la instruccion anterior primero!") }
-    else {
-      const newInput = document.createElement("textarea");
-      newInput.setAttribute("name", "instructions");
-      newInput.setAttribute("key", index);
-      setIndex(index + 1);
-      newInput.onchange = (event, key) => { handleCheckbox() }
+  const handleCheckbox = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log(name);
 
-      instructionsLabel.appendChild(newInput);
+    let array = inputs[name];
+    let find = array.indexOf(value);
 
+    if (find >= 0) {
+      array.slice(find, 1);
+    } else {
+      array.push(value);
     }
-  }
 
+    setInputs({
+      ...inputs,
+      [name]: array,
+    });
+    setErrors(
+      validate({
+        ...inputs,
+        [name]: array,
+      })
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -135,7 +164,7 @@ export default function RecipeForm() {
         diets: [],
         dishTypes: [],
         instructions: [],
-        image: ""
+        image: "",
       });
       setErrors({
         name: "",
@@ -144,15 +173,13 @@ export default function RecipeForm() {
         diets: "",
         dishTypes: "",
         instructions: "",
-        image: ""
-      })
+        image: "",
+      });
       alert("Receta creada con exito!");
-      //history
     } else {
       alert("El formulario no se puede enviar con errores!");
     }
   };
-
 
   return (
     <div>
@@ -164,31 +191,55 @@ export default function RecipeForm() {
         <input type="text" name="name" onChange={handleChange} />
 
         <label htmlFor="summary">Summary:</label>
-        <textarea name="summary" cols="30" rows="10" onChange={handleChange}></textarea>
+        <textarea
+          name="summary"
+          cols="30"
+          rows="10"
+          onChange={handleChange}
+        ></textarea>
 
         <label htmlFor="healthScore">Health Score:</label>
         <input type="number" name="healthScore" onChange={handleChange} />
 
         <label htmlFor="diets">Diets:</label>
-        <select name="diets" id="diets" multiple="multiple" onChange={handleChange}>
+        <select name="diets" id="diets" multiple>
           {diets.map((diet) => (
-            <option value={diet.name}>{diet.name}</option>
+            <option
+              key={diet}
+              selected={inputs.diets.includes(diet)}
+              onChange={handleCheckbox}
+              value={diet.name}
+            >
+              {diet.name}
+            </option>
           ))}
         </select>
 
         <label htmlFor="dishTypes">Dish Types:</label>
-        <select name="dishTypes" id="dishTypes" onChange={handleChange}>
+        <select name="dishTypes" id="dishTypes" multiple>
           {dishes.map((dish) => (
-            <option value={dish}>{dish}</option>
+            <option
+              key={dish}
+              selected={inputs.dishTypes.includes(dish)}
+              onChange={handleCheckbox}
+              value={dish}
+            >
+              {dish}
+            </option>
           ))}
         </select>
 
         <div className="instructions-form">
           <label htmlFor="instructions">Instructions:</label>
-          <div className="instructionsInputs">
-
-          </div>
-          <button type="button" onClick={addInstruction}>Add</button>
+          {instructions.map((instruction) => (
+            <textarea
+              key={instruction.id}
+              onChange={() => handleInstructions(instruction.id)}
+            />
+          ))}
+          <button type="button" onClick={addInstruction}>
+            Add
+          </button>
         </div>
 
         <label htmlFor="image">Image:</label>

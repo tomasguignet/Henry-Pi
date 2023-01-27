@@ -11,6 +11,7 @@ export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 export const ORDER_ALPHABETICALLY = "ORDER_ALPHABETICALLY";
 export const CREATE_RECIPE = "CREATE_RECIPE";
 export const CREATE_DIET = "CREATE_DIET";
+export const SET_LOADING = "SET_LOADING";
 
 //Definimos las acciones con su tipo
 export const getDiets = () => {
@@ -116,6 +117,10 @@ export const orderAlphabetically = (asc) => {
     }
   };
 };
+
+export const loading = (boolean) => {
+  return {type: SET_LOADING , payload: boolean};
+}
 
 export const cleanRecipe = () => {
   return { type: CLEAN_RECIPE };
