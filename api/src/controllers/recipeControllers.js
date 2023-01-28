@@ -31,7 +31,7 @@ async function getRecipesFromApi(name) {
             name: recipe.title,
             summary: recipe.summary,
             healthScore: recipe.healthScore,
-            diets: recipe.diets,
+            diets: recipe.diets.map(diet => (diet.charAt(0).toUpperCase() + diet.slice(1))),
             dishTypes: recipe.dishTypes,
             instructions: recipe.analyzedInstructions[0]?.steps.map(step => {
                 return step.step;
@@ -48,7 +48,7 @@ async function getRecipeFromApi(id) {
         name: result.data.title,
         summary: result.data.summary,
         healthScore: result.data.healthScore,
-        diets: result.data.diets,
+        diets: result.data.diets.map(diet => (diet.charAt(0).toUpperCase() + diet.slice(1))),
         dishTypes: result.data.dishTypes,
         instructions: result.data.analyzedInstructions[0]?.steps.map(step => {
             return step.step;
@@ -140,9 +140,11 @@ async function getRecipe(id) {
 }
 
 //Creamos la funcion para registrar una nueva receta
-async function createRecipe(name, summary, healthScore, dishTypes, instructions, image, diets) {
-    const newRecipe = await Recipe.create({ name, summary, healthScore, dishTypes, instructions, image });
-    if (diets) await newRecipe.addDiet(diets);
+async function createRecipe(name, summary, healthScore, dishTypes, instructions, diets) {
+    console.log({ name, summary, healthScore, dishTypes, instructions });
+    const newRecipe = await Recipe.create({ name, summary, healthScore, dishTypes, instructions });
+    console.log(newRecipe);
+    await newRecipe.addDiet(diets);
     return newRecipe;
 }
 

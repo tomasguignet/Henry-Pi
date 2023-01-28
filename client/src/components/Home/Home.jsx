@@ -3,7 +3,7 @@ import Recipe from "../Recipe/Recipe";
 import Pagination from "../Pagination/Pagination";
 /* import Loading from "../Loading/Loading"; */
 import { Link } from "react-router-dom";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 /* import { getDiets, getRecipes, loading } from "../../redux/actions"; */
 import styles from "./Home.module.css";
 
@@ -22,7 +22,9 @@ export default function Home() {
   //Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+useEffect(() => {
 
+},[recipes])
   return (
     <div className={styles.container}>
 {/*       {loader && <Loading/>} */}

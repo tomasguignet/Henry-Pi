@@ -39,8 +39,7 @@ export default function RecipeForm() {
     healthScore: 0,
     diets: [],
     dishTypes: [],
-    instructions: [],
-    image: "",
+    instructions: []
   });
 
   const [errors, setErrors] = useState({
@@ -49,8 +48,7 @@ export default function RecipeForm() {
     healthScore: "",
     diets: "",
     dishTypes: "",
-    instructions: "",
-    image: "",
+    instructions: ""
   });
 
   function showCheckboxes(name) {
@@ -86,18 +84,10 @@ export default function RecipeForm() {
     instructions,
   }) => {
     const errors = {};
-    console.log("instructions " + instructions);
-    console.log("diets" + diets);
-    console.log("dishes " + dishTypes);
 
-    errors.name = !name ? "Se requiere un nombre" : errors.name;
-    errors.summary = !summary
-      ? "Se requiere un resumen de la receta"
-      : errors.summary;
-    errors.healthScore =
-      healthScore < 0
-        ? "La puntuacion no puede ser negativa"
-        : errors.healthScore;
+    !name && (errors.name= "Se requiere un nombre");
+    !summary && (errors.summary= "Se requiere un resumen de la receta");
+    healthScore < 0 && (errors.healthScore= "La puntuacion no puede ser negativa");
     if (!diets.length) errors.diets = "Tiene que tener al menos una dieta";
     if (!dishTypes.length)
       errors.dishTypes = "Tiene que tener al menos un tipo de plato";
@@ -131,8 +121,8 @@ export default function RecipeForm() {
     let newArray = [];
     const text = event.target.value;
     console.log(id);
-
-    setInstructions([...instructions, instructions[id].text = text]);
+    instructions[id].text = text;
+    /* setInstructions([...instructions, ]); */
 
     instructions.forEach((i) => {
       newArray.push(i.text);
@@ -157,7 +147,7 @@ export default function RecipeForm() {
     let find = array.indexOf(value);
 
     if (find >= 0) {
-      array.slice(find, 1);
+      array.splice(find,1);
     } else {
       array.push(value);
     }
@@ -177,7 +167,7 @@ export default function RecipeForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!Object.keys(errors).length) {
-      /* dispatch(createRecipe(inputs)); */
+      dispatch(createRecipe(inputs));
       console.log(inputs);
       setInputs({
         name: "",
@@ -186,7 +176,6 @@ export default function RecipeForm() {
         diets: [],
         dishTypes: [],
         instructions: [],
-        image: "",
       });
       setErrors({
         name: "",
@@ -195,11 +184,11 @@ export default function RecipeForm() {
         diets: "",
         dishTypes: "",
         instructions: "",
-        image: "",
       });
       alert("Receta creada con exito!");
-      /* history.push("/home"); */
+      history.push("/home");
     } else {
+      console.log(Object.keys(errors));
       alert("El formulario no se puede enviar con errores!");
     }
   };
@@ -224,6 +213,7 @@ export default function RecipeForm() {
         <label htmlFor="healthScore">Health Score:</label>
         <input type="number" name="healthScore" onChange={handleChange} />
 
+
         <div className={styles.multiselect}>
           <div
             className={styles.selectBox}
@@ -241,7 +231,7 @@ export default function RecipeForm() {
             {diets.map((diet) => (
               <label htmlFor={diet.name}>
                 <input
-                  value={diet.name}
+                  value={diet.id}
                   type="checkbox"
                   id={diet.name}
                   onChange={(e) => handleCheckbox(e, "diets")}
@@ -251,6 +241,7 @@ export default function RecipeForm() {
             ))}
           </div>
         </div>
+
 
         <div className={styles.multiselect}>
           <div
@@ -292,9 +283,6 @@ export default function RecipeForm() {
             Add
           </button>
         </div>
-
-        <label htmlFor="image">Image:</label>
-        <input type="file" name="image" onChange={handleChange} />
 
         <button type="submit">Submit</button>
       </form>

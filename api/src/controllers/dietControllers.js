@@ -29,12 +29,12 @@ async function getDietsFromDB() {
 async function preChargeDietsInDB() {
   /* const diets = await getDietsFromApi(); */
   const diets = [
-    "Gluten Free",
-    "Dairy Free",
+    "Gluten free",
+    "Dairy free",
     "Ketogenic",
-    "Vegetarian",
-    "Lacto-Vegetarian",
-    "Ovo-Vegetarian",
+    "Lacto ovo vegetarian",
+    "Lacto vegetarian",
+    "Ovo vegetarian",
     "Vegan",
     "Pescetarian",
     "Paleo",

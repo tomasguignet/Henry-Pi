@@ -46,29 +46,38 @@ const reducer = (state = initialState, action) => {
         currentRecipes: action.payload,
       };
     case FILTER_BY_DIETS:
-      return {
-        ...state,
-        currentRecipes: state.allRecipes.filter((recipe) => {
-          return recipe.diets.includes(action.payload);
-        }),
-        //REVISAR EL BIEN COMO LLEGAN LAS DIETAS DE LA DB Y LA ACTION
+      if (action.payload.length) {
+        return {
+          ...state,
+          currentRecipes: state.allRecipes.filter((recipe) => {
+            for (const diet of action.payload) {
+              if (recipe.diets.includes(diet)) return true;
+            }
+          }),
+          //REVISAR EL BIEN COMO LLEGAN LAS DIETAS DE LA DB Y LA ACTION
+        };
+      } else {
+        return {
+          ...state,
+          currentRecipes: state.allRecipes
+        };
       };
     case ORDER_ALPHABETICALLY:
       const recipesAlphabetically = action.payload
         ? state.currentRecipes.sort((a, b) => {
-            a = a.name.toLowerCase();
-            b = b.name.toLowerCase();
-            if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
-          })
+          a = a.name.toLowerCase();
+          b = b.name.toLowerCase();
+          if (a > b) return 1;
+          if (a < b) return -1;
+          return 0;
+        })
         : state.currentRecipes.sort((a, b) => {
-            a = a.name.toLowerCase();
-            b = b.name.toLowerCase();
-            if (a < b) return 1;
-            if (a > b) return -1;
-            return 0;
-          });
+          a = a.name.toLowerCase();
+          b = b.name.toLowerCase();
+          if (a < b) return 1;
+          if (a > b) return -1;
+          return 0;
+        });
       return {
         ...state,
         currentRecipes: recipesAlphabetically,
@@ -76,15 +85,15 @@ const reducer = (state = initialState, action) => {
     case ORDER_BY_SCORE:
       const recipesByScore = action.payload
         ? state.currentRecipes.sort((a, b) => {
-            if (a.healthScore > b.healthScore) return 1;
-            if (a.healthScore < b.healthScore) return -1;
-            return 0;
-          })
+          if (a.healthScore > b.healthScore) return 1;
+          if (a.healthScore < b.healthScore) return -1;
+          return 0;
+        })
         : state.currentRecipes.sort((a, b) => {
-            if (a.healthScore < b.healthScore) return 1;
-            if (a.healthScore > b.healthScore) return -1;
-            return 0;
-          });
+          if (a.healthScore < b.healthScore) return 1;
+          if (a.healthScore > b.healthScore) return -1;
+          return 0;
+        });
       return {
         ...state,
         currentRecipes: recipesByScore,
