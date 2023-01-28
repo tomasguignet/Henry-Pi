@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createRecipe } from "../../redux/actions";
+import { createRecipe, getDiets, getRecipes } from "../../redux/actions";
 import styles from "./RecipeForm.module.css";
 
 export default function RecipeForm() {
@@ -168,7 +168,7 @@ export default function RecipeForm() {
     event.preventDefault();
     if (!Object.keys(errors).length) {
       dispatch(createRecipe(inputs));
-      console.log(inputs);
+      dispatch(getRecipes());
       setInputs({
         name: "",
         summary: "",

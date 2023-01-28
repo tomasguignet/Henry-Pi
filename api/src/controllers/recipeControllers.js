@@ -131,7 +131,7 @@ async function getRecipes(name) {
     return recipes;
 }
 async function getRecipe(id) {
-    if (id.length <= 5) {
+    if (id.length <= 7) {
         var recipe = await getRecipeFromApi(id)
     } else {
         var recipe = await getRecipeFromDB(id);

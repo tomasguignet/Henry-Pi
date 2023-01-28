@@ -40,7 +40,7 @@ async function preChargeDietsInDB() {
     "Paleo",
     "Primal",
     "Low FODMAP",
-    "Whole30",
+    "Whole 30",
   ];
   for (const diet of diets) {
     Diet.findOrCreate({where: { name: diet }});

@@ -41,9 +41,9 @@ export const getRecipes = () => {
 };
 
 export const getRecipe = (id) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
-      const response = axios.get(`http://localhost:3001/recipes/${id}`);
+      const response = await axios.get(`http://localhost:3001/recipes/${id}`);
       return dispatch({ type: GET_RECIPE, payload: response.data });
     } catch (error) {
       console.log(error.message);
@@ -82,9 +82,9 @@ export const getRecipesByName = (name) => {
       const response = await axios.get(
         `http://localhost:3001/recipes?name=${name}`
       );
-      return dispatch({ type: GET_RECIPES_BY_NAME, payload: response });
+      return dispatch({ type: GET_RECIPES_BY_NAME, payload: response.data });
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 };

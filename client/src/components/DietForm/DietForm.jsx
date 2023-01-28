@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { createDiet } from './../../redux/actions';
+import { useState , useEffect} from "react";
+import { createDiet, getDiets } from './../../redux/actions';
 
 function DietForm() {
   const dispatch = useDispatch();
@@ -38,12 +38,17 @@ function DietForm() {
       alert("Corregir errores antes de enviar");
     } else {
       dispatch(createDiet({name:name}));
+      dispatch(getDiets())
       alert("Se ha crado la dieta");
       setName("");
       setError("");  
       history.push("/home");
     }
   };
+
+  useEffect(()=> {
+    console.log("actualice");
+  },[diets, dispatch])
 
   return (
     <div>

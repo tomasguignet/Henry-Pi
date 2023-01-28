@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => {
         });
       return {
         ...state,
-        currentRecipes: recipesAlphabetically,
+        currentRecipes: recipesAlphabetically.slice(0),
       };
     case ORDER_BY_SCORE:
       const recipesByScore = action.payload
@@ -96,7 +96,7 @@ const reducer = (state = initialState, action) => {
         });
       return {
         ...state,
-        currentRecipes: recipesByScore,
+        currentRecipes: recipesByScore.slice(0),
       };
 
     case CREATE_RECIPE:
