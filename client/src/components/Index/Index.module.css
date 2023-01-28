@@ -7,7 +7,7 @@
     filter: brightness(1.3);
 }
 
-.logo-img {
+.logoImg {
     position: absolute;
     left: 95.5vw;
     top: 1vh;
@@ -15,7 +15,7 @@
     height: 40px;
 }
 
-.title-box {
+.titleBox {
     position: fixed;
     top: 26vh;
     left: 29vw;
@@ -27,7 +27,7 @@
     letter-spacing: 2px;
 }
 
-.subtitle-box {
+.subtitleBox {
     position: fixed;
     top: 48vh;
     left: 29vw;
@@ -39,7 +39,7 @@
     font-size: 5.5vh;
 }
 
-.button-box {
+.buttonBox {
     position: fixed;
     top: 52.5vh;
     left: 61vw;

@@ -6,7 +6,8 @@ async function getDietsFromApi() {
   let diets = [];
   //Traemos los resultados de la API
   const results = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100`
+    /* `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100` */
+    "https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5"
   );
   //De los resultados analizamos si en el array "diets" existe cierta dieta y si no existe la pusheamos
   results.data.results.forEach((result) => {
@@ -15,13 +16,6 @@ async function getDietsFromApi() {
         diets.push(diet);
       }
     });
-    /*     for (let i = 0; i < result.diets; i++) {
-      console.log("Una dieta");
-      if (!diets.includes(result.diets[i])) {
-        console.log("Se pushea la dieta");
-        diets.push(result.diets[i]);
-      }
-    } */
   });
   return diets;
 }

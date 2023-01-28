@@ -30,9 +30,10 @@ export const getDiets = () => {
 export const getRecipes = () => {
   return function (dispatch) {
     try {
+      dispatch(loading(true));
       axios
         .get("http://localhost:3001/recipes")
-        .then((data) => dispatch({ type: GET_RECIPES, payload: data.data }));
+        .then((data) => dispatch({ type: GET_RECIPES, payload: data.data })).then(response => dispatch(loading(false)));
     } catch (error) {
       console.log(error.message);
     }
@@ -53,7 +54,7 @@ export const getRecipe = (id) => {
 export const createRecipe = (recipe) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:3001/recipes",
         recipe
       );

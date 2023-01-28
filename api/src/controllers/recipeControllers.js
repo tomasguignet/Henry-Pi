@@ -6,7 +6,7 @@ const { API_KEY } = process.env;
 async function getRecipesFromApi(name) {
     let recipes = [];
     //Traemos los resultados de la API
-    const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100`);
+    const results = await axios.get(/* `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100` */"https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5");
 
     //Vemos si llego una query en el path
     if (name) {

@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react"; */
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import { getRecipes, getDiets } from "../../redux/actions";
+/* import { useDispatch } from "react-redux"; */
+/* import axios from "axios"; */
+/* import { getRecipes, getDiets } from "../../redux/actions"; */
 import styles from  "./Index.module.css";
 import logoHenry from "../../images/logoHenry.jpg";
 
 export default function Index() {
-  const dispatch = useDispatch();
+/*   const dispatch = useDispatch(); */
 
-  useEffect(async () => {
+/*   useEffect(async () => {
     axios.get("http://localhost:3001/diets/preCharge").then(
       (data) => console.log("DataBase ready!"),
       (error) => console.log(error.message)
     );
     dispatch(getDiets());
     dispatch(getRecipes());
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
-    <div className="container">
-      <div className="logo-box">
-        <img className="logo-img" src={logoHenry} alt="henry-logo" />
+    <div className={styles.container}>
+      <div className={styles.logoBox}>
+        <img className={styles.logoImg} src={logoHenry} alt="henry-logo" />
       </div>
-      <div className="title-box">
-        <h1 className="title">Henry Food</h1>
+      <div className={styles.titleBox}>
+        <h1 className={styles.title}>Henry Food</h1>
       </div>
-      <div className="subtitle-box">
-        <h3 className="subtitle">Lets see whats inside!</h3>
+      <div className={styles.subtitleBox}>
+        <h3 className={styles.subtitle}>Lets see whats inside!</h3>
       </div>
       <Link to={"/home"}>
-        <div className="button-box">
-          <button type="button" className="button">
+        <div className={styles.buttonBox}>
+          <button type="button" className={styles.button}>
             Start
           </button>
         </div>

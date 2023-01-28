@@ -1,20 +1,21 @@
 import logoHenry from "../../images/logoHenry.jpg";
 import { Link } from "react-router-dom";
+import styles from "./NavBar.module.css";
 
 export default function NavBar() {
   return (
-    <div className="container">
-      <div className="box-logo">
+    <div className={styles.container}>
+      <div className={styles.box_logo}>
         <Link to={"/home"}>
-          <img className="logo-henry" src={logoHenry} alt="logo-henry" />
+          <img className={styles.logo_henry} src={logoHenry} alt="logo-henry" />
         </Link>
       </div>
 
-      <div className="box-title">
-        <h2 className="title">Henry Food</h2>
+      <div className={styles.box_title}>
+        <h2 className={styles.title}>Henry Food</h2>
       </div>
 
-      <div className="box-link">
+      <div className={styles.box_link}>
         <ul>
           <Link to={"/home"}>
             <li>Home</li>

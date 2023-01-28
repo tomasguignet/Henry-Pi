@@ -3,3 +3,9 @@
     height: 80%;
     
 }
+
+.card {
+    display: inline;
+    margin: 15px;
+    text-decoration: none;
+}
