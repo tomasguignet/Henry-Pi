@@ -17,13 +17,13 @@ export default function NavBar() {
 
       <div className={styles.box_link}>
         <ul>
-          <Link to={"/home"}>
+          <Link className={styles.link} to={"/home"}>
             <li>Home</li>
           </Link>
-          <Link to={"/recipeForm"}>
+          <Link className={styles.link} to={"/recipeForm"}>
             <li>New Recipe</li>
           </Link>
-          <Link to={"/dietForm"}>
+          <Link className={styles.link} to={"/dietForm"}>
             <li>New Diet</li>
           </Link>
         </ul>

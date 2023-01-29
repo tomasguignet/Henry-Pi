@@ -55,6 +55,7 @@ export const createRecipe = (recipe) => {
         "http://localhost:3001/recipes",
         recipe
       );
+      alert("Receta creada con exito!")
       return dispatch({ type: CREATE_RECIPE, payload: data.data });
     } catch (error) {
       alert(error.response.data)

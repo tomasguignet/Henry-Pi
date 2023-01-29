@@ -8,14 +8,16 @@
 }
 
 .logoImg {
+    display: flex;
     position: absolute;
     left: 95.5vw;
     top: 1vh;
     width: 4%;
-    height: 40px;
+    height: 5%;
 }
 
 .titleBox {
+    display: flex;
     position: fixed;
     top: 26vh;
     left: 29vw;
@@ -28,6 +30,7 @@
 }
 
 .subtitleBox {
+    display: flex;
     position: fixed;
     top: 48vh;
     left: 29vw;
@@ -40,6 +43,7 @@
 }
 
 .buttonBox {
+    display: flex;
     position: fixed;
     top: 52.5vh;
     left: 61vw;
@@ -62,4 +66,33 @@
 .button:hover {
     cursor: pointer;
     background-color:#604b2e;
+}
+
+@media all and (max-width: 900px) {
+    .logoImg {
+        left: 93.6vw;
+        top: 1.5vh;
+        width: 5%;
+        height: 5%;
+    }
+
+    .titleBox {
+        top: 17vh;
+        left: 38vw;
+    }
+
+    .subtitleBox {
+        top: 37vh;
+        left: 38vw;
+    }
+
+    .buttonBox {
+        top: 59.5vh;
+        left: 62vw;
+    }
+    .button {
+        border-radius: 22px;
+        width: 23vw;
+        height: 9vh;
+    }
 }

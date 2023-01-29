@@ -1,32 +1,80 @@
 .container {
+    display: flex;
     width: 100%;
-    height: 20%;
-    background-color: antiquewhite;
+    height: 15vh;
+    background-color: rgb(41, 37, 37);
 }
 
 
 .box_logo {
-    display: inline;
+    display: inline-flex;
+    height: 100%;
+    width: 6%;
+    margin: 0 5px;
+    align-items: center;
 }
 .logo_henry {
-    width: 10%;
-    margin: 20px 0;
+    display: inline-flex;
+    width: 100%;
 }
 
 
 .box_title {
-    display: inline-block;
+    display: inline-flex;
+    margin-left: 5vw;
+    align-items: center;
+}
+.title {
+    display: flex;
+    font-size: 2.6rem;
+    color: aliceblue;
+    font-family: 'Unbounded', cursive;
+    letter-spacing: 3px;
 }
 
 
 .box_link {
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    right: 80px;
-    padding: 2% 0;
+    display: inline-flex;
+    margin-left: 30vw;
+    align-items: center;
 }
-.box_link li {
-    display: table-cell;
-    padding-left: 60px;
+.link {
+    display: inline-flex;
+    margin-left: 5vw;
+    color: aliceblue;
+    font-size: 1.5rem;
+    font-family: 'Anton', sans-serif;
+    /* font-family: 'Alfa Slab One', cursive; */
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    list-style: none;
+}
+
+@media all and (max-width: 900px) {
+    .container {
+        height: 20vh;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box_logo {
+        display: flex;
+        height: 1vh;
+    }
+    .logo_henry {
+        
+    }
+
+    .box_link {
+        margin-left: 1vw;
+    }
+    .box_link ul {
+        display: inline-flex;
+        margin: 0;
+        padding: 1vw;
+    }
+    .link {
+        margin-left: 1vw;
+    }
+
 }
