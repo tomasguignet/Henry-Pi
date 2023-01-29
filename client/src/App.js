@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.css"
 import { Switch, Route } from "react-router-dom";
 import Index from "./components/Index/Index";
 import Home from "./components/Home/Home";
@@ -22,7 +22,7 @@ function App() {
     );
     dispatch(getDiets());
     dispatch(getRecipes());
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <Switch>
@@ -31,8 +31,10 @@ function App() {
       </Route>
       <Route exact path="/home">
         <NavBar />
-        <SearchBar />
-        <Home />
+        <div className={styles.container}>
+          <SearchBar />
+          <Home />
+        </div>
       </Route>
       <Route path="/recipes/:id">
         <NavBar />
@@ -47,7 +49,7 @@ function App() {
         <DietForm />
       </Route>
       <Route path="/*">
-        <PageNotFound/>
+        <PageNotFound />
       </Route>
     </Switch>
   );

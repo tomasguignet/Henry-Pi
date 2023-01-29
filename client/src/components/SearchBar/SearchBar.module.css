@@ -1,3 +1,29 @@
+.container {
+  background-color: rgb(41, 37, 37);
+  width: 15vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  border-top: black  solid;
+  box-shadow:0px 50px 18px 0px #000000;
+
+}
+
+.resetButtonBox {
+  display: flex;
+  height: 8%;
+  width: 100%;
+  align-items: center;
+}
+.resetButtonBox button {
+  width: 10vw;
+  height: 5vh;
+  margin: auto;
+  background-color: rgb(158, 127, 81);
+  border-radius: 0.3vw;
+}
+
+
 .multiselect {
     width: 200px;
   }

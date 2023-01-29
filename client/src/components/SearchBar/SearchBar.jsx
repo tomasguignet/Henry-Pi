@@ -99,18 +99,19 @@ function SearchBar() {
 
 
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+
+      <div className={styles.resetButtonBox}>
         <button type="button" onClick={handleReset}>Reset recipes</button>
       </div>
 
-      <form>
+      <form className={styles.nameForm}>
         <label htmlFor="recipeName">Recipe name:</label>
         <input name="recipeName" type="text" onChange={handleName} />
         <button type="submit" onClick={handleSubmitName}>Search</button>
       </form>
 
-      <div>
+      <div className={styles.dietFilterBox}>
         <label htmlFor="dietFilter">Diet filter</label>
         <div className={styles.multiselect}>
           <div className={styles.selectBox} onClick={showCheckboxes}>
@@ -138,7 +139,7 @@ function SearchBar() {
         </div>
       </div>
 
-      <div>
+      <div className={styles.orderNameBox}>
         <h3>Order by name</h3>
         <fieldset id="orderByName">
           <label htmlFor="ascName">
@@ -168,7 +169,7 @@ function SearchBar() {
         </fieldset>
       </div>
 
-      <div>
+      <div className={styles.orderScoreBox}>
         <h3>Order by score</h3>
         <fieldset id="orderByScore">
           <label htmlFor="ascScore">

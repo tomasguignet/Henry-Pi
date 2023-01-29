@@ -1,7 +1,9 @@
 .container {
-    width: 100%;
-    height: 80%;
-    
+    width: 84vw;
+    height: 86vh;
+    display: flex;
+    background-color:rgba(77,40,3,0.89);
+/*     float: left; */
 }
 
 .card {
