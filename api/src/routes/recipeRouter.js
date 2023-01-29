@@ -43,7 +43,6 @@ recipeRouter.post("/", async(req, res) => {
     );
     res.status(200).send(newRecipe);
   } catch (error) {
-    console.log((error.message));
     res.status(400).send(error.message);
   }
 });

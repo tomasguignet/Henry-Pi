@@ -29,7 +29,7 @@ dietRouter.post("/", async (req, res) => {
   const { name } = req.body;
   try {
     const newDiet = await createDiet(name);
-    res.status(200).send("Se cargo la dieta");
+    res.status(200).send(newDiet);
   } catch (error) {
     res.status(400).send(error.message);
   }

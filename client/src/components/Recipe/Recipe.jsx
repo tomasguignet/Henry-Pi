@@ -14,7 +14,7 @@ function Recipe({ id, image, name, diets, healthScore }) {
 
       <div className={styles.diets}>
         {diets.map((diet) => (
-          <h3 key={diet.id}>{diet}</h3>
+          <h3 key={diet}>{diet}</h3>
         ))}
       </div>
     </div>

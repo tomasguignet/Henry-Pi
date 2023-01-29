@@ -38,7 +38,6 @@ function DietForm() {
       alert("Corregir errores antes de enviar");
     } else {
       dispatch(createDiet({name:name}));
-      dispatch(getDiets())
       alert("Se ha crado la dieta");
       setName("");
       setError("");  

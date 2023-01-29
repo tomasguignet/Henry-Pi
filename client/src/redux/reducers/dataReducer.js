@@ -54,7 +54,6 @@ const reducer = (state = initialState, action) => {
               if (recipe.diets.includes(diet)) return true;
             }
           }),
-          //REVISAR EL BIEN COMO LLEGAN LAS DIETAS DE LA DB Y LA ACTION
         };
       } else {
         return {
@@ -85,11 +84,19 @@ const reducer = (state = initialState, action) => {
     case ORDER_BY_SCORE:
       const recipesByScore = action.payload
         ? state.currentRecipes.sort((a, b) => {
+/*           console.log(typeof a.healthScore);
+          console.log(a);
+          console.log(typeof b.healthScore);
+          console.log(b); */
           if (a.healthScore > b.healthScore) return 1;
           if (a.healthScore < b.healthScore) return -1;
           return 0;
         })
         : state.currentRecipes.sort((a, b) => {
+/*           console.log(typeof a.healthScore);
+          console.log(a);
+          console.log(typeof b.healthScore);
+          console.log(b); */
           if (a.healthScore < b.healthScore) return 1;
           if (a.healthScore > b.healthScore) return -1;
           return 0;
@@ -100,12 +107,19 @@ const reducer = (state = initialState, action) => {
       };
 
     case CREATE_RECIPE:
+      const newRecipes = state.allRecipes;
+      newRecipes.push(action.payload);
       return {
         ...state,
+        allRecipes: newRecipes,
+        currentRecipes: newRecipes
       };
     case CREATE_DIET:
+      const newDiets = state.diets;
+      newDiets.push(action.payload);
       return {
         ...state,
+        diets: newDiets
       };
     case CLEAN_RECIPE:
       return {

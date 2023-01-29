@@ -26,7 +26,7 @@ export default function Recipedetail() {
         <div>
           <ul>
             {recipe.diets?.map((diet) => (
-              <li>{diet}</li>
+              <li key={diet}>{diet}</li>
             ))}
           </ul>
         </div>
@@ -42,7 +42,7 @@ export default function Recipedetail() {
         <div>
           <ol>
             {recipe.instructions?.map(ins => (
-              <li>{ins}</li>
+              <li key={ins}>{ins}</li>
             ))}
           </ol>
         </div>

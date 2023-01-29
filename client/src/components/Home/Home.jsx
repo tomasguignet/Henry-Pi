@@ -25,8 +25,9 @@ export default function Home() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    
-  }, [currentPage,recipes, dispatch]);
+    dispatch(getRecipes());
+    dispatch(getDiets());
+  }, [dispatch]);
   return (
     /*    <div> */
     <div className={styles.container}>
@@ -42,10 +43,10 @@ export default function Home() {
       <div>
         
         {recipes.length ? currentRecipes.map((recipe) => (
-          <div className={styles.card}>
-            <Link key={recipe.id} to={`/recipes/${recipe.id}`} >
+          <div key={recipe.id} className={styles.card}>
+            <Link to={`/recipes/${recipe.id}`} >
               <Recipe
-                key={recipe.id}
+                key={recipe.name}
                 id={recipe.id}
                 image={recipe.image}
                 name={recipe.name}

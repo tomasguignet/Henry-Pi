@@ -141,11 +141,13 @@ async function getRecipe(id) {
 
 //Creamos la funcion para registrar una nueva receta
 async function createRecipe(name, summary, healthScore, dishTypes, instructions, diets) {
-    console.log({ name, summary, healthScore, dishTypes, instructions });
-    const newRecipe = await Recipe.create({ name, summary, healthScore, dishTypes, instructions });
-    console.log(newRecipe);
-    await newRecipe.addDiet(diets);
-    return newRecipe;
+    try {
+        const newRecipe = await Recipe.create({ name, summary, healthScore, dishTypes, instructions });
+        await newRecipe.addDiet(diets);
+        return newRecipe;
+    } catch (error) {
+        throw Error("Ya existe una receta con ese nombre");
+    }
 }
 
 module.exports = {

@@ -18,9 +18,8 @@ export const getDiets = () => {
   return async function (dispatch) {
     /* await axios.get("https://http://localhost:3001/diets/preCharge"); */
     try {
-      axios
-        .get("http://localhost:3001/diets")
-        .then((data) => dispatch({ type: GET_DIETS, payload: data.data }));
+      const data = await axios.get("http://localhost:3001/diets")
+      dispatch({ type: GET_DIETS, payload: data.data });
     } catch (error) {
       console.log(error.message);
     }
@@ -28,12 +27,10 @@ export const getDiets = () => {
 };
 
 export const getRecipes = () => {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
-      dispatch(loading(true));
-      axios
-        .get("http://localhost:3001/recipes")
-        .then((data) => dispatch({ type: GET_RECIPES, payload: data.data })).then(response => dispatch(loading(false)));
+      const data = await axios.get("http://localhost:3001/recipes")
+      dispatch({ type: GET_RECIPES, payload: data.data });
     } catch (error) {
       console.log(error.message);
     }
@@ -54,13 +51,13 @@ export const getRecipe = (id) => {
 export const createRecipe = (recipe) => {
   return async function (dispatch) {
     try {
-      await axios.post(
+      const data = await axios.post(
         "http://localhost:3001/recipes",
         recipe
       );
-      return dispatch({ type: CREATE_RECIPE });
+      return dispatch({ type: CREATE_RECIPE, payload: data.data });
     } catch (error) {
-      console.log(error.message);
+      alert(error.response.data)
     }
   };
 };
@@ -68,8 +65,8 @@ export const createRecipe = (recipe) => {
 export const createDiet = (diet) => {
   return async function (dispatch) {
     try {
-      await axios.post("http://localhost:3001/diets", diet);
-      return dispatch({ type: CREATE_DIET });
+      const data= await axios.post("http://localhost:3001/diets", diet);
+      return dispatch({ type: CREATE_DIET, payload: data.data });
     } catch (error) {
       console.log(error.message);
     }

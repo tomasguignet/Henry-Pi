@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByDiets, getRecipes, getRecipesByName, orderAlphabetically, orderByScore } from "../../redux/actions";
 import Home from "../Home/Home";
@@ -87,9 +87,23 @@ function SearchBar() {
     }
   }
 
+  const handleReset = () => {
+    dispatch(getRecipes());
+    setOrders({
+      orderByName: { asc: false, des: false },
+      orderByScore: { asc: false, des: false },
+    });
+    setDietsFilter([]);
+    setExpanded(false);
+  }
+
 
   return (
     <div>
+      <div>
+        <button type="button" onClick={handleReset}>Reset recipes</button>
+      </div>
+
       <form>
         <label htmlFor="recipeName">Recipe name:</label>
         <input name="recipeName" type="text" onChange={handleName} />
@@ -110,7 +124,7 @@ function SearchBar() {
             className={styles.checkboxes}
           >
             {diets.map((diet) => (
-              <label key={diet} htmlFor={diet.name}>
+              <label key={diet.name} htmlFor={diet.name}>
                 <input
                   value={diet.name}
                   type="checkbox"

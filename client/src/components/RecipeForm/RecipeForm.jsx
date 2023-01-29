@@ -168,7 +168,6 @@ export default function RecipeForm() {
     event.preventDefault();
     if (!Object.keys(errors).length) {
       dispatch(createRecipe(inputs));
-      dispatch(getRecipes());
       setInputs({
         name: "",
         summary: "",
@@ -229,7 +228,7 @@ export default function RecipeForm() {
             className={styles.checkboxes}
           >
             {diets.map((diet) => (
-              <label htmlFor={diet.name}>
+              <label key={diet.id} htmlFor={diet.name}>
                 <input
                   value={diet.id}
                   type="checkbox"
@@ -258,7 +257,7 @@ export default function RecipeForm() {
             className={styles.checkboxes}
           >
             {dishes.map((dish) => (
-              <label htmlFor={dish}>
+              <label key={dish} htmlFor={dish}>
                 <input
                   value={dish}
                   type="checkbox"
