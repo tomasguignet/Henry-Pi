@@ -62,7 +62,7 @@
         height: 1vh;
     }
     .logo_henry {
-        
+        display: flex;
     }
 
     .box_link {
