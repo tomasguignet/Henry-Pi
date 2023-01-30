@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByDiets, getRecipes, getRecipesByName, orderAlphabetically, orderByScore } from "../../redux/actions";
+import {
+  filterByDiets,
+  getRecipes,
+  getRecipesByName,
+  orderAlphabetically,
+  orderByScore,
+} from "../../redux/actions";
 import Home from "../Home/Home";
 import styles from "./SearchBar.module.css";
 
 function SearchBar() {
   const dispatch = useDispatch();
   const diets = useSelector((state) => state.data.diets);
-  
-  const [name , setName] = useState("");
+
+  const [name, setName] = useState("");
   const [dietsFilter, setDietsFilter] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [orders, setOrders] = useState({
     orderByName: { asc: false, des: false },
     orderByScore: { asc: false, des: false },
   });
-  
-  
+
   const showCheckboxes = () => {
     if (!expanded) {
       setExpanded(true);
@@ -42,50 +47,48 @@ function SearchBar() {
     const name = event.target.name;
     const value = event.target.value;
     if (name == "orderByName") {
-        if (value === "true") {
-            setOrders({
-                orderByName: {asc: true , des: false},
-                orderByScore: {asc: false , des: false}
-            })
-            dispatch(orderAlphabetically(true));
-            
-        } else {
-            setOrders({
-                orderByName: {asc: false , des: true},
-                orderByScore: {asc: false , des: false}
-            })
-            dispatch(orderAlphabetically(false));
-        }
+      if (value === "true") {
+        setOrders({
+          orderByName: { asc: true, des: false },
+          orderByScore: { asc: false, des: false },
+        });
+        dispatch(orderAlphabetically(true));
+      } else {
+        setOrders({
+          orderByName: { asc: false, des: true },
+          orderByScore: { asc: false, des: false },
+        });
+        dispatch(orderAlphabetically(false));
+      }
     } else {
-        if (value === "true") {
-            setOrders({
-              orderByName: {asc: false , des: false},
-                orderByScore: {asc: true , des: false}
-            });
-            dispatch(orderByScore(true))
-        } else {
-            setOrders({
-                orderByName: {asc: false , des: false},
-                  orderByScore: {asc: false , des: true}
-              });
-              dispatch(orderByScore(false))
-        }
+      if (value === "true") {
+        setOrders({
+          orderByName: { asc: false, des: false },
+          orderByScore: { asc: true, des: false },
+        });
+        dispatch(orderByScore(true));
+      } else {
+        setOrders({
+          orderByName: { asc: false, des: false },
+          orderByScore: { asc: false, des: true },
+        });
+        dispatch(orderByScore(false));
+      }
     }
   };
 
   const handleName = (event) => {
     const name = event.target.value;
-    setName(name)
-  }
+    setName(name);
+  };
   const handleSubmitName = (event) => {
     event.preventDefault();
     try {
-        dispatch(getRecipesByName(name));
-        
+      dispatch(getRecipesByName(name));
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
-  }
+  };
 
   const handleReset = () => {
     dispatch(getRecipes());
@@ -95,24 +98,28 @@ function SearchBar() {
     });
     setDietsFilter([]);
     setExpanded(false);
-  }
-
+  };
 
   return (
     <div className={styles.container}>
-
       <div className={styles.resetButtonBox}>
-        <button type="button" onClick={handleReset}>Reset recipes</button>
+        <button type="button" onClick={handleReset}>
+          Reset recipes
+        </button>
       </div>
 
-      <form className={styles.nameForm}>
-        <label htmlFor="recipeName">Recipe name:</label>
-        <input name="recipeName" type="text" onChange={handleName} />
-        <button type="submit" onClick={handleSubmitName}>Search</button>
-      </form>
+      <div className={styles.nameForm}>
+        <form>
+          <label htmlFor="recipeName">Recipe name:</label>
+          <input name="recipeName" type="text" onChange={handleName} />
+          <button type="submit" onClick={handleSubmitName}>
+            Search
+          </button>
+        </form>
+      </div>
 
       <div className={styles.dietFilterBox}>
-        <label htmlFor="dietFilter">Diet filter</label>
+        <label className={styles.dietfilterTitle} htmlFor="dietFilter">Diet filter</label>
         <div className={styles.multiselect}>
           <div className={styles.selectBox} onClick={showCheckboxes}>
             <select>

@@ -1,11 +1,12 @@
 .container {
-  background-color: rgb(41, 37, 37);
+  background-color: rgb(56, 51, 51);
   width: 15vw;
-  height: 85vh;
+  height: 82vh;
   display: flex;
   flex-direction: column;
-  border-top: black  solid;
+  border-top: rgb(31, 30, 30)  solid;
   box-shadow:0px 50px 18px 0px #000000;
+  padding-left: 0.5vw;
 
 }
 
@@ -21,20 +22,119 @@
   margin: auto;
   background-color: rgb(158, 127, 81);
   border-radius: 0.3vw;
+
+  font-size: 1.1rem;
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+}
+
+.nameForm {
+  height: 10%;
+  margin: 1vh 0;
+  display: flex;
+  border-top: rgb(31, 30, 30)  solid;
+  margin-bottom: 2vh;
+  padding-top: 1vh;
+}
+.nameForm label {
+  display: block;
+  color: azure;
+  font-size: 1.2rem;
+  margin-top: 0.5vh;
+  margin-bottom: 1vh;
+  margin-left: 0.15vw;
+}
+.nameForm input {
+  height: 2.7vh;
+  width: 9.5vw;
+  font-size: 1rem;
+  background-color: rgb(158, 127, 81);
+  border-radius: 5px;
+  margin-right: 0.7vw;
+}
+.nameForm button {
+  height: 3.4vh;
+  width: 3.9vw;
+  border-radius: 4px;
+  background-color: azure;
+  font-family: 'Play', sans-serif;
+  font-size: 0.95rem;
+  font: bolder;
+}
+
+.dietFilterBox {
+  display: flex;
+  flex-direction: column;
+  border-top: rgb(31, 30, 30)  solid;
+  margin-bottom: 3vh;
+}
+.dietfilterTitle {
+  display: flex;
+  width: 100%;
+  height: 4vh;
+  margin-top: 1.5vh;
+  color: azure;
+  font-size: 1.2rem;
+}
+
+.orderNameBox {
+  display: flex;
+  border-top: rgb(31, 30, 30)  solid;
+  flex-direction: column;
+}
+.orderNameBox h3 {
+  color: azure;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+.orderNameBox fieldset {
+  width: 12.5vw;
+}
+.orderNameBox label {
+  color: azure;
+  margin:0 0.5vw ;
+}
+
+.orderScoreBox {
+  display: flex;
+  border-top: rgb(31, 30, 30)  solid;
+  flex-direction: column;
+}
+.orderScoreBox h3 {
+  color: azure;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+.orderScoreBox fieldset {
+  width: 12.5vw;
+}
+.orderScoreBox label {
+  color: azure;
+  margin:0 0.5vw ;
 }
 
 
+/* Dropdown checkobox */
 .multiselect {
-    width: 200px;
+    width: 12vw;
   }
   
   .selectBox {
     position: relative;
+    background-color: rgb(158, 127, 81);
+    height: 3vh;
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
   
   .selectBox select {
+    border: none;
+    background-color: rgb(158, 127, 81);
     width: 100%;
     font-weight: bold;
+    font-size: 1rem;
+    margin: 0.5vh 0;
   }
   
   .overSelect {
@@ -46,15 +146,157 @@
   }
   
   .checkboxes {
-      height: 100px;
-      overflow-y: scroll;
-      border: 1px #dadada solid;
+    background-color: azure;
+    height: 100px;
+    overflow-y: scroll;
+    border-radius: 1px;
   }
   
   .checkboxes label {
+    height: 2.5vh;
+    border-bottom: #000000 solid 1px;
     display: block;
   }
   
   .checkboxes label:hover {
-    background-color: #1e90ff;
+    background-color: rgb(158, 127, 81);
+  }
+
+  .checkboxes input:checked {
+    background-color: #000000;
+  }
+
+
+  @media all and (max-width: 900px) {
+    .container {
+      flex-direction: row;
+      width: 100vw;
+      height: 20vh;
+      padding: 0;
+    }
+
+    .resetButtonBox {
+      display: flex;
+      width: 14vw;
+      height: 100%;
+      margin: 0;
+    }
+    .resetButtonBox button {
+      margin: auto 0;
+      margin-left: 2vw;
+      height: 8vh;
+    }
+
+    .nameForm {
+      width: 21.5vw;
+      height: 100%;
+      margin: 0;
+      display: flex;
+      border: none;
+      padding: 0;
+    }
+    .nameForm form {
+      display: flex;
+      flex-direction: column;
+      padding: 3vh 0;
+      justify-content: center;
+      align-items: center;
+      margin: 0 4vw;
+    }
+    .nameForm label {
+      display: block;
+      color: azure;
+      font-size: 1.2rem;
+      margin: 0 0 1vh;
+    }
+    .nameForm input {
+      display: block;
+      height: 2.7vh;
+      width: 11.5vw;
+      font-size: 0.8rem;
+      background-color: rgb(158, 127, 81);
+      border-radius: 5px;
+      margin: 0 0 1.5vh
+    }
+    .nameForm button {
+      height: 3.4vh;
+      width: 8vw;
+      margin: 0 2vw;
+      border-radius: 4px;
+      background-color: azure;
+      font-family: 'Play', sans-serif;
+      font-size: 0.95rem;
+      font: bolder;
+    }
+
+    .dietFilterBox {
+      width: 21.5vw;
+      display: flex;
+      flex-direction: column;
+      border: none;
+      margin-bottom: 3vh;
+    }
+    .dietfilterTitle {
+      display: flex;
+      height: 4vh;
+      padding: 0;
+      margin: 0;
+      justify-content: center;
+      margin-top: 1.5vh;
+      color: azure;
+      font-size: 1.2rem;
+    }
+    .multiselect {
+      width: 21.5vw;
+    }
+
+    .orderNameBox {
+      width: 21.5vw;
+      display: flex;
+      border: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .orderNameBox h3 {
+      color: azure;
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+    .orderNameBox fieldset {
+      display: flex;
+      flex-direction: column;
+      width: 12.5vw;
+      height: 10vh;
+      padding: 0;
+    }
+    .orderNameBox label {
+      color: azure;
+      margin: 1vh 0;
+    }
+
+    .orderScoreBox {
+      width: 21.5vw;
+      display: flex;
+      border: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .orderScoreBox h3 {
+      color: azure;
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+    .orderScoreBox fieldset {
+      display: flex;
+      flex-direction: column;
+      width: 12.5vw;
+      height: 10vh;
+      padding: 0;
+    }
+    .orderScoreBox label {
+      color: azure;
+      margin: 1vh 0;
+    }
   }
