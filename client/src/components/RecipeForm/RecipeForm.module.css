@@ -1,15 +1,140 @@
+.container {
+  background-color:rgba(51, 27, 2, 0.89);
+  display: flex;
+  min-height: 85vh;
+  width: 100%;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  min-height: 95%;
+  margin: 1% 20%;
+  background-color: gainsboro;
+
+  border: solid rgba(27, 15, 1, 0.89);
+  box-shadow:3px 3px 9px 2px #000000;
+  border-radius: 20px;
+}
+
+.title {
+  text-align: center;
+}
+.title h1 {
+  margin-top: 1vh;
+  font-size: 2.5vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  margin-left: 14vw;
+  margin-bottom: 0.5vh;
+  width: 50.7%;
+  font-size: 1vw;
+}
+.nameInput {
+  margin-left: 14vw;
+  margin-bottom: 1.5vh;
+  width: 50%;
+  padding: 0 0.5vw;
+  font-size: 1vw;
+
+  border-radius: 0.3em;
+  height: 2.7vh;
+}
+
+.summary {
+  margin-left: 14vw;
+  margin-bottom: 0.5vh;
+  width: 50.7%;
+  font-size: 1vw;
+}
+.summaryInput {
+  margin-left: 14vw;
+  margin-bottom: 1.5vh;
+  width: 50%;
+  resize: none;
+  padding: 0.5vw;
+  font-size: 1.3em;
+
+  border-radius: 0.5em;
+  height: 10em;
+}
+
+.healthScore {
+  margin-left: 14vw;
+  margin-bottom: 0.5vh;
+  width: 50.7%;
+  font-size: 1vw;
+}
+.healthScoreInput {
+  margin-left: 14vw;
+  margin-bottom: 1.5vh;
+  width: 50%;
+  height: 2.7vh;
+  font-size: 1vw;
+  padding: 0 0.5vw;
+
+  border-radius: 0.3em;
+}
+
+.instructions {
+  margin-left: 14vw;
+  margin-bottom: 1.5vh;
+  margin-top: 1vh;
+  width: 50.7%;
+  font-size: 1vw;
+  justify-content: center;
+}
+.instructions button {
+  margin-left: 1vw;
+  width: 5vw;
+  height: 3vh;
+  font-size: 0.9em;
+  border-radius: 0.3em;
+}
+.instructions .textArea textarea {
+  margin-top: 1vh;
+  width: 60%;
+  resize: none;
+  min-height: 5vh;
+}
+
+.submit {
+  margin-top: 10vh;
+  margin-left: 14vw;
+  margin-bottom: 2vh;
+  width: 50.7%;
+  font-size: 1vw;
+}
+
 
 .multiselect {
-  width: 200px;
+  margin-left: 14vw;
+  margin-bottom: 1vh;
+  width: 50.7%;
+  font-size: 1vw;
+  
 }
 
 .selectBox {
   position: relative;
+  
 }
 
 .selectBox select {
   width: 100%;
   font-weight: bold;
+  height: 3vh;
+  border-radius: 0.3em;
+  font-size: 0.8em;
+  margin: 0vh 0;
 }
 
 .overSelect {
@@ -24,10 +149,13 @@
     height: 100px;
     overflow-y: scroll;
     border: 1px #dadada solid;
+    background-color: rgb(197, 193, 193);
 }
 
 .checkboxes label {
   display: block;
+  margin: 0.3vh 0;
+  border-bottom: solid thin;
 }
 
 .checkboxes label:hover {

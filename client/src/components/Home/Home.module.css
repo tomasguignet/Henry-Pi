@@ -1,13 +1,130 @@
 .container {
     width: 84vw;
-    height: 86vh;
+    height: 218.3vh;
     display: flex;
+    flex-direction: column;
     background-color:rgba(51, 27, 2, 0.89);
 /*     float: left; */
 }
 
+.pagination {
+    display: flex;
+    margin: 0 auto;
+}
+.pagination nav {
+    display: flex;
+}
+.pagination ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    list-style-type: none;
+}
+.pagination li:hover {
+    transition-duration: 0.3s;
+    filter: brightness(1.25);
+    
+}
+.pagination button {
+    margin: 0 0.5vw;
+    --size: 32px;
+    --margin: 6px;
+    margin: 0 var(--margin);
+    border-radius: 6px;
+    background: #202020;
+    max-width: auto;
+    min-width: var(--size);
+    width:2.3vw;
+    height:3.6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 6px;
+    background: #202020;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: rgb(201, 200, 200);
+}
+
+
 .card {
-    display: inline;
-    margin: 15px;
+    display: inline-flex;
+    margin: 2vh 2.4vw;
+    width: 27%;
+    height: 60vh;
+    background-color: grey;
+    box-shadow:0px 0px 15px 5px #000000;
+    border: solid grey;
+    border-radius: 5px;
     text-decoration: none;
+}
+.card:hover {
+    transition-duration: 0.7s;
+    filter: brightness(1.25);
+}
+.card a {
+    text-decoration: none;
+    width: 100%;
+}
+
+
+
+@media all and (max-width: 900px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        background-color:rgba(51, 27, 2, 0.89);
+        justify-content: center;
+
+    /*     float: left; */
+    }
+
+
+    .pagination{
+        width: 100vw;
+        margin: 0 20%;
+    }
+    .pagination nav {
+        display: flex;
+        width: 59vw;
+    }
+    .pagination ul {
+        width: 59vw;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        list-style-type: none;
+    }
+    .pagination li:hover {
+        transition-duration: 0.3s;
+        filter: brightness(1.25);
+        
+    }
+    .pagination button {
+        font-size: 2vh;
+    }
+
+
+
+    .card {
+        display: inline-flex;
+        margin: 2vh 4.5vw;
+        width: 40%;
+        height: 60vh;
+        background-color: grey;
+        box-shadow:0px 0px 15px 5px #000000;
+        border: solid grey;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .card:hover {
+        transition-duration: 0.7s;
+        filter: brightness(1.25);
+    }
+    .card a {
+        text-decoration: none;
+        width: 100%;
+    }
 }

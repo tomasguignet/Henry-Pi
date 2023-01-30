@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState , useEffect} from "react";
 import { createDiet, getDiets } from './../../redux/actions';
+import styles from "./DietForm.module.css";
 
 function DietForm() {
   const dispatch = useDispatch();
@@ -50,12 +51,12 @@ function DietForm() {
   },[diets, dispatch])
 
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.contentContainer}>
         <h1>Create your own diet</h1>
 
-        <div>
-          <h3>Diets</h3>
+        <div className={styles.dietslist}>
+          <h2>Diets</h2>
           <ul>
             {diets.map((diet) => (
               <li key={diet.name}>{diet.name}</li>
@@ -63,7 +64,7 @@ function DietForm() {
           </ul>
         </div>
 
-        <form onSubmit={handleSubmit} action="">
+        <form className={styles.form} onSubmit={handleSubmit} action="">
           <label htmlFor="name">Diet name:</label>
           <input name="name" value={name} type="text" onChange={handleChange} />
           {error? (<p>{error}</p>) : null}

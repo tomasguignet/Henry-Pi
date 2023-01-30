@@ -102,107 +102,113 @@ function SearchBar() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.resetButtonBox}>
-        <button type="button" onClick={handleReset}>
-          Reset recipes
-        </button>
-      </div>
 
-      <div className={styles.nameForm}>
-        <form>
-          <label htmlFor="recipeName">Recipe name:</label>
-          <input name="recipeName" type="text" onChange={handleName} />
-          <button type="submit" onClick={handleSubmitName}>
-            Search
+      <div className={styles.containerContent}>
+        <div className={styles.resetButtonBox}>
+          <button type="button" onClick={handleReset}>
+            Reset recipes
           </button>
-        </form>
-      </div>
+        </div>
 
-      <div className={styles.dietFilterBox}>
-        <label className={styles.dietfilterTitle} htmlFor="dietFilter">Diet filter</label>
-        <div className={styles.multiselect}>
-          <div className={styles.selectBox} onClick={showCheckboxes}>
-            <select>
-              <option>Select diets to filter</option>
-            </select>
-            <div className={styles.overSelect}></div>
-          </div>
-          <div
-            style={{ display: expanded ? "block" : "none" }}
-            className={styles.checkboxes}
-          >
-            {diets.map((diet) => (
-              <label key={diet.name} htmlFor={diet.name}>
-                <input
-                  value={diet.name}
-                  type="checkbox"
-                  id={diet.name}
-                  onChange={handleFilter}
-                />
-                {diet.name}
-              </label>
-            ))}
+        <div className={styles.nameForm}>
+          <form>
+            <label htmlFor="recipeName">Recipe name:</label>
+            <input name="recipeName" type="text" onChange={handleName} />
+            <button type="submit" onClick={handleSubmitName}>
+              Search
+            </button>
+          </form>
+        </div>
+
+        <div className={styles.dietFilterBox}>
+          <label className={styles.dietfilterTitle} htmlFor="dietFilter">
+            Diet filter
+          </label>
+          <div className={styles.multiselect}>
+            <div className={styles.selectBox} onClick={showCheckboxes}>
+              <select>
+                <option>Select diets to filter</option>
+              </select>
+              <div className={styles.overSelect}></div>
+            </div>
+            <div
+              style={{ display: expanded ? "block" : "none" }}
+              className={styles.checkboxes}
+            >
+              {diets.map((diet) => (
+                <label key={diet.name} htmlFor={diet.name}>
+                  <input
+                    value={diet.name}
+                    type="checkbox"
+                    id={diet.name}
+                    onChange={handleFilter}
+                  />
+                  {diet.name}
+                </label>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles.orderNameBox}>
-        <h3>Order by name</h3>
-        <fieldset id="orderByName">
-          <label htmlFor="ascName">
-            <input
-              type="radio"
-              checked={orders.orderByName.asc}
-              value={true}
-              name="orderByName"
-              id="ascName"
-              onChange={(e) => {
-                handleOrder(e);
-              }}
-            />
-            Ascendant
-          </label>
-          <label htmlFor="desName">
-            <input
-              type="radio"
-              checked={orders.orderByName.des}
-              value={false}
-              name="orderByName"
-              id="desName"
-              onChange={handleOrder}
-            />
-            Descendant
-          </label>
-        </fieldset>
-      </div>
+        <div className={styles.orderNameBox}>
+          <h3>Order by name</h3>
+          <fieldset id="orderByName">
+            <label htmlFor="ascName">
+              <input
+                type="radio"
+                checked={orders.orderByName.asc}
+                value={true}
+                name="orderByName"
+                id="ascName"
+                onChange={(e) => {
+                  handleOrder(e);
+                }}
+              />
+              Ascendant
+            </label>
+            <label htmlFor="desName">
+              <input
+                type="radio"
+                checked={orders.orderByName.des}
+                value={false}
+                name="orderByName"
+                id="desName"
+                onChange={handleOrder}
+              />
+              Descendant
+            </label>
+          </fieldset>
+        </div>
 
-      <div className={styles.orderScoreBox}>
-        <h3>Order by score</h3>
-        <fieldset id="orderByScore">
-          <label htmlFor="ascScore">
-            <input
-              type="radio"
-              checked={orders.orderByScore.asc}
-              value={true}
-              name="orderByScore"
-              id="ascScore"
-              onChange={handleOrder}
-            />
-            Ascendant
-          </label>
-          <label htmlFor="desScore">
-            <input
-              type="radio"
-              checked={orders.orderByScore.des}
-              value={false}
-              name="orderByScore"
-              id="desScore"
-              onChange={handleOrder}
-            />
-            Descendant
-          </label>
-        </fieldset>
+        <div className={styles.orderScoreBox}>
+          <h3>Order by score</h3>
+          <fieldset id="orderByScore">
+            <label htmlFor="ascScore">
+              <input
+                type="radio"
+                checked={orders.orderByScore.asc}
+                value={true}
+                name="orderByScore"
+                id="ascScore"
+                onChange={handleOrder}
+              />
+              Ascendant
+            </label>
+            <label htmlFor="desScore">
+              <input
+                type="radio"
+                checked={orders.orderByScore.des}
+                value={false}
+                name="orderByScore"
+                id="desScore"
+                onChange={handleOrder}
+              />
+              Descendant
+            </label>
+          </fieldset>
+        </div>
       </div>
+      
     </div>
   );
 }

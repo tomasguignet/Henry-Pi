@@ -39,7 +39,7 @@ export default function RecipeForm() {
     healthScore: 0,
     diets: [],
     dishTypes: [],
-    instructions: []
+    instructions: [],
   });
 
   const [errors, setErrors] = useState({
@@ -48,7 +48,7 @@ export default function RecipeForm() {
     healthScore: "",
     diets: "",
     dishTypes: "",
-    instructions: ""
+    instructions: "",
   });
 
   function showCheckboxes(name) {
@@ -85,9 +85,10 @@ export default function RecipeForm() {
   }) => {
     const errors = {};
 
-    !name && (errors.name= "Se requiere un nombre");
-    !summary && (errors.summary= "Se requiere un resumen de la receta");
-    healthScore < 0 && (errors.healthScore= "La puntuacion no puede ser negativa");
+    !name && (errors.name = "Se requiere un nombre");
+    !summary && (errors.summary = "Se requiere un resumen de la receta");
+    healthScore < 0 &&
+      (errors.healthScore = "La puntuacion no puede ser negativa");
     if (!diets.length) errors.diets = "Tiene que tener al menos una dieta";
     if (!dishTypes.length)
       errors.dishTypes = "Tiene que tener al menos un tipo de plato";
@@ -147,7 +148,7 @@ export default function RecipeForm() {
     let find = array.indexOf(value);
 
     if (find >= 0) {
-      array.splice(find,1);
+      array.splice(find, 1);
     } else {
       array.push(value);
     }
@@ -192,98 +193,119 @@ export default function RecipeForm() {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Create your own recipe</h1>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" name="name" onChange={handleChange} />
+    <div className={styles.container}>
+      <div className={styles.contentContainer}>
+        <div className={styles.title}>
+          <h1>Create your own recipe</h1>
+        </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <label className={styles.name} htmlFor="name">
+            Name:
+          </label>
+          <input
+            className={styles.nameInput}
+            type="text"
+            name="name"
+            onChange={handleChange}
+          />
 
-        <label htmlFor="summary">Summary:</label>
-        <textarea
-          name="summary"
-          cols="30"
-          rows="10"
-          onChange={handleChange}
-        ></textarea>
+          <label className={styles.summary} htmlFor="summary">
+            Summary:
+          </label>
+          <textarea
+            className={styles.summaryInput}
+            name="summary"
+            cols="30"
+            rows="10"
+            onChange={handleChange}
+          ></textarea>
 
-        <label htmlFor="healthScore">Health Score:</label>
-        <input type="number" name="healthScore" onChange={handleChange} />
+          <label className={styles.healthScore} htmlFor="healthScore">
+            Health Score:
+          </label>
+          <input
+            className={styles.healthScoreInput}
+            type="number"
+            name="healthScore"
+            onChange={handleChange}
+          />
 
-
-        <div className={styles.multiselect}>
-          <div
-            className={styles.selectBox}
-            onClick={() => showCheckboxes("diets")}
-          >
-            <select>
-              <option>Select diets</option>
-            </select>
-            <div className={styles.overSelect}></div>
+          <div className={styles.multiselect}>
+            <div
+              className={styles.selectBox}
+              onClick={() => showCheckboxes("diets")}
+            >
+              <select>
+                <option>Select diets</option>
+              </select>
+              <div className={styles.overSelect}></div>
+            </div>
+            <div
+              style={{ display: expanded.diets ? "block" : "none" }}
+              className={styles.checkboxes}
+            >
+              {diets.map((diet) => (
+                <label key={diet.id} htmlFor={diet.name}>
+                  <input
+                    value={diet.id}
+                    type="checkbox"
+                    id={diet.name}
+                    onChange={(e) => handleCheckbox(e, "diets")}
+                  />
+                  {diet.name}
+                </label>
+              ))}
+            </div>
           </div>
-          <div
-            style={{ display: expanded.diets ? "block" : "none" }}
-            className={styles.checkboxes}
-          >
-            {diets.map((diet) => (
-              <label key={diet.id} htmlFor={diet.name}>
-                <input
-                  value={diet.id}
-                  type="checkbox"
-                  id={diet.name}
-                  onChange={(e) => handleCheckbox(e, "diets")}
+
+          <div className={styles.multiselect}>
+            <div
+              className={styles.selectBox}
+              onClick={() => showCheckboxes("dishes")}
+            >
+              <select>
+                <option>Select dishes</option>
+              </select>
+              <div className={styles.overSelect}></div>
+            </div>
+            <div
+              style={{ display: expanded.dishes ? "block" : "none" }}
+              className={styles.checkboxes}
+            >
+              {dishes.map((dish) => (
+                <label key={dish} htmlFor={dish}>
+                  <input
+                    value={dish}
+                    type="checkbox"
+                    id={dish}
+                    onChange={(e) => handleCheckbox(e, "dishTypes")}
+                  />
+                  {dish}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.instructions}>
+            <label htmlFor="instructions">Instructions:</label>
+            <button type="button" onClick={addInstruction}>
+              Add
+            </button>
+            {instructions.map((instruction) => (
+              <div className={styles.textArea}>
+                <textarea
+                  key={instruction.id}
+                  onChange={(e) => handleInstructions(e, instruction.id)}
                 />
-                {diet.name}
-              </label>
+              </div>
             ))}
           </div>
-        </div>
 
-
-        <div className={styles.multiselect}>
-          <div
-            className={styles.selectBox}
-            onClick={() => showCheckboxes("dishes")}
-          >
-            <select>
-              <option>Select dishes</option>
-            </select>
-            <div className={styles.overSelect}></div>
-          </div>
-          <div
-            style={{ display: expanded.dishes ? "block" : "none" }}
-            className={styles.checkboxes}
-          >
-            {dishes.map((dish) => (
-              <label key={dish} htmlFor={dish}>
-                <input
-                  value={dish}
-                  type="checkbox"
-                  id={dish}
-                  onChange={(e) => handleCheckbox(e, "dishTypes")}
-                />
-                {dish}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="instructions-form">
-          <label htmlFor="instructions">Instructions:</label>
-          {instructions.map((instruction) => (
-            <textarea
-              key={instruction.id}
-              onChange={(e) => handleInstructions(e, instruction.id)}
-            />
-          ))}
-          <button type="button" onClick={addInstruction}>
-            Add
+          <button className={styles.submit} type="submit">
+            Submit
           </button>
-        </div>
-
-        <button type="submit">Submit</button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

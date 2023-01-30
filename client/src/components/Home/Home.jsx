@@ -19,7 +19,8 @@ export default function Home() {
   //Get current posts
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes&&recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const currentRecipes =
+    recipes && recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   //Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -40,25 +41,27 @@ export default function Home() {
         />
       </div>
 
-      <div>
-        
-        {recipes.length ? currentRecipes.map((recipe) => (
-          <div key={recipe.id} className={styles.card}>
-            <Link to={`/recipes/${recipe.id}`} >
-              <Recipe
-                key={recipe.name}
-                id={recipe.id}
-                image={recipe.image}
-                name={recipe.name}
-                diets={recipe.diets}
-                healthScore={recipe.healthScore}
-              />
-            </Link>
+      <div className={styles.content}>
+        {recipes.length ? (
+          currentRecipes.map((recipe) => (
+            <div key={recipe.id} className={styles.card}>
+              <Link to={`/recipes/${recipe.id}`}>
+                <Recipe
+                  key={recipe.name}
+                  id={recipe.id}
+                  image={recipe.image}
+                  name={recipe.name}
+                  diets={recipe.diets}
+                  healthScore={recipe.healthScore}
+                />
+              </Link>
+            </div>
+          ))
+        ) : (
+          <div>
+            <h1>Nothing search!</h1>
           </div>
-        )): 
-        <div>
-          <h1>Nothing search!</h1>
-          </div>}
+        )}
       </div>
 
       <div className={styles.pagination}>
