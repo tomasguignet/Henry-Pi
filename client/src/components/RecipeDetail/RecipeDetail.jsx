@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getRecipe } from "../../redux/actions";
+import { getRecipe, cleanRecipe } from "../../redux/actions";
+import styles from "./RecipeDetail.module.css";
 
 export default function Recipedetail() {
   const dispatch = useDispatch();
@@ -9,42 +10,47 @@ export default function Recipedetail() {
 
   useEffect(() => {
     dispatch(getRecipe(id));
+    return dispatch(cleanRecipe());
+
   }, [dispatch, id]);
 
   const recipe = useSelector((state) => state.data.recipe);
 
   return (
-    <div>
+    <div className={styles.container}>
 
-      <div className="left-box">
-        <div>
-          <h1>{recipe.name}</h1>
-        </div>
-        <div>
-          <img src={recipe.image} alt="recipe-image" />
-        </div>
-        <div>
-          <ul>
-            {recipe.diets?.map((diet) => (
-              <li key={diet}>{diet}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <div className={styles.content}>
 
-      <div className="rigth-box">
-        <div>
-          <h3>Health Score : {recipe.healthScore}</h3>
+        <div className={styles.leftBox}>
+          <div className={styles.name}>
+            <h1>{recipe.name}</h1>
+          </div>
+          <div className={styles.image}>
+            <img src={recipe.image} alt="recipe-image" />
+          </div>
+          <div className={styles.diets}>
+            <ul>
+              {recipe.diets?.map((diet) => (
+                <li key={diet}>{diet}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div>
-          <p>{recipe.summary}</p>
-        </div>
-        <div>
-          <ol>
-            {recipe.instructions?.map(ins => (
-              <li key={ins}>{ins}</li>
-            ))}
-          </ol>
+
+        <div className={styles.rightBox}>
+          <div className={styles.healthScore}>
+            <h3>Health Score : {recipe.healthScore}</h3>
+          </div>
+          <div className={styles.summary}>
+            <p>{recipe.summary}</p>
+          </div>
+          <div className={styles.instructions}>
+            <ol>
+              {recipe.instructions?.map(ins => (
+                <li key={ins}>{ins}</li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
 
