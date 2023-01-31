@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getRecipes, getDiets } from "../src/redux/actions";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://henry-pi-production-4320.up.railway.app/";
 
 function App() {
   const dispatch = useDispatch();
