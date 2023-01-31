@@ -85,12 +85,11 @@ export default function RecipeForm() {
   }) => {
     const errors = {};
 
-    !name && (errors.name = "Se requiere un nombre");
-    !summary && (errors.summary = "Se requiere un resumen de la receta");
-    healthScore < 0 &&
-      (errors.healthScore = "La puntuacion no puede ser negativa");
-    if (!diets.length) errors.diets = "Tiene que tener al menos una dieta";
-    if (!dishTypes.length)
+    if (!name)  (errors.name = "Se requiere un nombre");
+    else if (!summary) (errors.summary = "Se requiere un resumen de la receta");
+    else if (healthScore < 0) (errors.healthScore = "La puntuacion no puede ser negativa");
+    else if (!diets.length) errors.diets = "Tiene que tener al menos una dieta";
+    else if (!dishTypes.length)
       errors.dishTypes = "Tiene que tener al menos un tipo de plato";
     if (instructions.length > 0) {
       for (const i of instructions) {
@@ -208,6 +207,7 @@ export default function RecipeForm() {
             name="name"
             onChange={handleChange}
           />
+          {errors.name? (<p>{errors.name}</p>): null}
 
           <label className={styles.summary} htmlFor="summary">
             Summary:
@@ -219,6 +219,7 @@ export default function RecipeForm() {
             rows="10"
             onChange={handleChange}
           ></textarea>
+          {errors.summary? (<p>{errors.summary}</p>): null}
 
           <label className={styles.healthScore} htmlFor="healthScore">
             Health Score:
@@ -229,6 +230,7 @@ export default function RecipeForm() {
             name="healthScore"
             onChange={handleChange}
           />
+          {errors.healthScore? (<p>{errors.healthScore}</p>): null}
 
           <div className={styles.multiselect}>
             <div
@@ -257,6 +259,7 @@ export default function RecipeForm() {
               ))}
             </div>
           </div>
+          {errors.diets? (<p>{errors.diets}</p>): null}
 
           <div className={styles.multiselect}>
             <div
@@ -285,6 +288,7 @@ export default function RecipeForm() {
               ))}
             </div>
           </div>
+          {errors.dishTypes? (<p>{errors.dishTypes}</p>): null}
 
           <div className={styles.instructions}>
             <label htmlFor="instructions">Instructions:</label>
@@ -300,6 +304,7 @@ export default function RecipeForm() {
               </div>
             ))}
           </div>
+          {errors.instructions? (<p>{errors.instructions}</p>): null}
 
           <button className={styles.submit} type="submit">
             Submit

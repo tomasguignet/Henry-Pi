@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getRecipe, cleanRecipe } from "../../redux/actions";
 import styles from "./RecipeDetail.module.css";
+import PageNotFound from "../PageNotFound/PageNotFound";
+import Loading from './../Loading/Loading';
 
 export default function Recipedetail() {
   const dispatch = useDispatch();
@@ -16,6 +18,8 @@ export default function Recipedetail() {
 
   const recipe = useSelector((state) => state.data.recipe);
 
+  if (!Object.keys(recipe).length) return (<Loading/>)
+
   return (
     <div className={styles.container}>
 
@@ -28,10 +32,19 @@ export default function Recipedetail() {
           <div className={styles.image}>
             <img src={recipe.image} alt="recipe-image" />
           </div>
+
           <div className={styles.diets}>
             <ul>
               {recipe.diets?.map((diet) => (
                 <li key={diet}>{diet}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.dishes}>
+            <ul>
+              {recipe.dishTypes?.map((dish) => (
+                <li key={dish}>{dish.charAt(0).toUpperCase() + dish.slice(1)}</li>
               ))}
             </ul>
           </div>

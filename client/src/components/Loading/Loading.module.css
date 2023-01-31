@@ -1,8 +1,13 @@
 .container {
     display: flex;
+    background-color: black;
+    width: 100%;
+    min-height: 100vh;
     justify-content: center;
 }
 
 .spinner {
-
+    margin: auto;
+    width: 8vw;
+    height: 8vw;
 }

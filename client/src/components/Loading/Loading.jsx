@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./Loading.module.css";
-import image from "../../images/loading_spinner.gif";
+import image from "../../images/loading_spinner_2.gif";
 
 function Loading() {
   return (

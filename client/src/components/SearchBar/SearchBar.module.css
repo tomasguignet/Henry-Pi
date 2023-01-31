@@ -29,6 +29,7 @@
   margin: auto;
   background-color: rgb(158, 127, 81);
   border-radius: 0.3vw;
+  cursor: pointer;
 
   font-size: 1.1rem;
   font-family: 'Play', sans-serif;
@@ -88,6 +89,7 @@
   display: flex;
   border-top: rgb(31, 30, 30)  solid;
   flex-direction: column;
+  margin-bottom: 1.5vh;
 }
 .orderNameBox h3 {
   color: azure;

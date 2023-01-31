@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import Recipe from "../Recipe/Recipe";
 import Pagination from "../Pagination/Pagination";
-/* import Loading from "../Loading/Loading"; */
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 /* import { getDiets, getRecipes, loading } from "../../redux/actions"; */
 import styles from "./Home.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { getDiets, getRecipe, getRecipes } from "../../redux/actions";
+import Loading from "../Loading/Loading";
 
 export default function Home() {
   const recipes = useSelector((state) => state.data.currentRecipes);
@@ -29,6 +29,9 @@ export default function Home() {
     dispatch(getRecipes());
     dispatch(getDiets());
   }, [dispatch]);
+
+  /* if(!recipes.length) return (<Loading/>); */
+
   return (
     /*    <div> */
     <div className={styles.container}>
@@ -58,8 +61,8 @@ export default function Home() {
             </div>
           ))
         ) : (
-          <div>
-            <h1>Nothing search!</h1>
+          <div className={styles.loading}>
+            <h1>Searching...</h1>
           </div>
         )}
       </div>

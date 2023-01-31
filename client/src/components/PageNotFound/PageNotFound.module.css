@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color:rgba(51, 27, 2, 0.942);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 5vw;
+    margin: 0;
+}
+.container h2 {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 2.5vw;
+}
+
+
+.button {
+    margin-top: 9vh;
+
+}
+.button button {
+    cursor: pointer;
+    background-color: rgb(37, 36, 36);
+    color: rgb(213, 218, 221);
+    font-family: 'Crete Round', serif;
+    font-size: 1.3vw;
+    width: 8vw;
+    height: 6vh;
+    border-radius: 0.5vw;
+}
