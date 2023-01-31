@@ -18,7 +18,7 @@ export const getDiets = () => {
   return async function (dispatch) {
     /* await axios.get("https://http://localhost:3001/diets/preCharge"); */
     try {
-      const data = await axios.get("http://localhost:3001/diets")
+      const data = await axios.get("/diets")
       dispatch({ type: GET_DIETS, payload: data.data });
     } catch (error) {
       console.log(error.message);
@@ -29,7 +29,7 @@ export const getDiets = () => {
 export const getRecipes = () => {
   return async function (dispatch) {
     try {
-      const data = await axios.get("http://localhost:3001/recipes")
+      const data = await axios.get("/recipes")
       dispatch({ type: GET_RECIPES, payload: data.data });
     } catch (error) {
       console.log(error.message);
