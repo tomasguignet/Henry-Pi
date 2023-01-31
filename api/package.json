@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
+    "start": "node index.js",
     "test": "mocha --timeout 6000 -w ./tests/**/*.spec.js"
   },
   "author": "Henry",
