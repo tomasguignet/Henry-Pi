@@ -56,6 +56,7 @@
     flex-direction: row;
     height: 10vh;
     width: 40vw;
+    padding-left: 0;
 }
 .diets li {
     font-size: 1.3vw;
