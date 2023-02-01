@@ -17,7 +17,7 @@ axios.defaults.baseURL = "https://henry-pi-production-4320.up.railway.app/";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    axios.get("http://localhost:3001/diets/preCharge").then(
+    axios.get("/preCharge").then(
       (data) => console.log("DataBase ready!"),
       (error) => console.log(error.message)
     );
