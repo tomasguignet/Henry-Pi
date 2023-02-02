@@ -30,7 +30,7 @@ export default function Home({currentPage, setCurrentPage}) {
     console.log("re");
     dispatch(getRecipes());
     dispatch(getDiets());
-  }, [ allRecipes]);
+  }, []);
 
   /* if(!recipes.length) return (<Loading/>); */
 
