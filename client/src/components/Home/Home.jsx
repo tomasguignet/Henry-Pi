@@ -27,9 +27,9 @@ export default function Home({currentPage, setCurrentPage}) {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
+    console.log("re");
     dispatch(getRecipes());
     dispatch(getDiets());
-    console.log("re");
   }, [ allRecipes]);
 
   /* if(!recipes.length) return (<Loading/>); */
