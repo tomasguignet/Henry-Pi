@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const loader = (state = initialState, action) => {
-    if (action.type = SET_LOADING) {
+    if (action.type === SET_LOADING) {
         return {
             ...state,
             loading: action.payload
