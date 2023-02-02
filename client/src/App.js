@@ -25,6 +25,8 @@ function App() {
     dispatch(getRecipes());
   }, [dispatch])
 
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <Switch>
       <Route exact path="/">
@@ -33,8 +35,8 @@ function App() {
       <Route exact path="/home">
         <NavBar />
         <div className={styles.container}>
-          <SearchBar />
-          <Home />
+          <SearchBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Home currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </div>
       </Route>
       <Route path="/recipes/:id">

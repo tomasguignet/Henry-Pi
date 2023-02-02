@@ -9,11 +9,11 @@ import SearchBar from "../SearchBar/SearchBar";
 import { getDiets, getRecipe, getRecipes } from "../../redux/actions";
 import Loading from "../Loading/Loading";
 
-export default function Home() {
+export default function Home({currentPage, setCurrentPage}) {
   const recipes = useSelector((state) => state.data.currentRecipes);
   /*   const loader = useSelector((state) => state.loader.loading); */
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
+  
   const [recipesPerPage] = useState(9);
 
   //Get current posts
@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getRecipes());
     dispatch(getDiets());
-  }, [dispatch]);
+  }, [dispatch, recipes]);
 
   /* if(!recipes.length) return (<Loading/>); */
 
