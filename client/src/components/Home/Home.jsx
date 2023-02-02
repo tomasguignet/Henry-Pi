@@ -29,7 +29,7 @@ export default function Home({currentPage, setCurrentPage}) {
   useEffect(() => {
     dispatch(getRecipes());
     dispatch(getDiets());
-  }, [dispatch, allRecipes]);
+  }, [ allRecipes]);
 
   /* if(!recipes.length) return (<Loading/>); */
 
