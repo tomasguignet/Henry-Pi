@@ -8,11 +8,12 @@ import NavBar from "./components/NavBar/NavBar";
 import DietForm from "./components/DietForm/DietForm";
 import SearchBar from "./components/SearchBar/SearchBar";
 import PageNotFound from './components/PageNotFound/PageNotFound';
-import { useEffect } from 'react';
+import { useEffect , useState } from 'react';
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getRecipes, getDiets } from "../src/redux/actions";
 axios.defaults.baseURL = "https://henry-pi-production-4320.up.railway.app/";
+
 
 function App() {
   const dispatch = useDispatch();
