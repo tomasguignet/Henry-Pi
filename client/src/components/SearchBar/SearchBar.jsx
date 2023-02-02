@@ -10,7 +10,7 @@ import {
 import Home from "../Home/Home";
 import styles from "./SearchBar.module.css";
 
-function SearchBar({setCurrentPage}) {
+function SearchBar({currentPage , setCurrentPage}) {
   const dispatch = useDispatch();
   const diets = useSelector((state) => state.data.diets);
 
@@ -86,6 +86,7 @@ function SearchBar({setCurrentPage}) {
     try {
       dispatch(getRecipesByName(name));
       setCurrentPage(1);
+      console.log(currentPage);
     } catch (error) {
       console.log(error.message);
     }

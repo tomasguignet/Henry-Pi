@@ -11,6 +11,7 @@ import Loading from "../Loading/Loading";
 
 export default function Home({currentPage, setCurrentPage}) {
   const recipes = useSelector((state) => state.data.currentRecipes);
+  const  allRecipes = useSelector((state) => state.data.allRecipes);
   /*   const loader = useSelector((state) => state.loader.loading); */
   const dispatch = useDispatch();
   
@@ -28,7 +29,7 @@ export default function Home({currentPage, setCurrentPage}) {
   useEffect(() => {
     dispatch(getRecipes());
     dispatch(getDiets());
-  }, [dispatch, recipes]);
+  }, [dispatch, allRecipes]);
 
   /* if(!recipes.length) return (<Loading/>); */
 
