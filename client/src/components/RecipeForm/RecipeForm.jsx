@@ -184,6 +184,7 @@ export default function RecipeForm() {
         dishTypes: "",
         instructions: "",
       });
+      dispatch(getRecipes());
       history.push("/home");
     } else {
       console.log(Object.keys(errors));
