@@ -6,9 +6,7 @@ async function getDietsFromApi() {
   let diets = [];
   //Traemos los resultados de la API
   const results = await axios.get(
-    /* `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100` */
-    "https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5"
-  );
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&&number=100`);
   //De los resultados analizamos si en el array "diets" existe cierta dieta y si no existe la pusheamos
   results.data.results.forEach((result) => {
     result.diets.forEach((diet) => {
