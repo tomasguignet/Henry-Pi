@@ -41,6 +41,7 @@ function SearchBar({currentPage , setCurrentPage}) {
     }
 
     dispatch(filterByDiets(dietsFilter));
+    setCurrentPage(1);
   };
 
   const handleOrder = (event) => {
